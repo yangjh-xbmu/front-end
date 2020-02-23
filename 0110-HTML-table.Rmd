@@ -44,6 +44,7 @@ Th 元素表示表头的单元格。
    <caption>表格说明文字</caption>
  <thead>
   <tr> <th> ID <th> Measurement <th> Average <th> Maximum
+ </thead>
  <tbody>
   <tr> <td> <th scope=rowgroup> Cats <td> <td>
   <tr> <td> 93 <th scope=row> Legs <td> 3.5 <td> 4
