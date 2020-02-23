@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>创建对象的各种方法</title>
+    <script>
+    function p(s) {
+        document.write(s + "<br />");
+    }
+    </script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    h2 {
+        border-bottom: 2px solid green;
+        line-height: 1.8em;
+    }
+
+    p {
+        font-size: 20;
+        padding: 5px 0;
+        font-weight: bolder;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript创建对象的各种方法</h1>
+    <p>创建对象可以使用关键词new 和 Object对象。</p>
+    <script>
+    var author = new Object();
+    author.words = '绿叶恋爱时便成了花';
+    p(typeof author);
+    p(author.words);
+    p(author['words']);
+    </script>
+    <p>创建对象也可以采用字面量形式。</p>
+    <script>
+    var adage = {
+        author: '泰戈尔',
+        sentence: '如果你把所有的错误都关在门外时，真理也要被关在门外面了。'
+    };
+    p(typeof adage);
+    p(adage.author + '说：' + adage.sentence);
+    </script>
+    <p>使用自定义函数为对象添加方法</p>
+    <script>
+    function pr() {
+        return "你的美如一个可爱的妇人，当她把灯灭了的时候。";
+    }
+    adage.pr = pr();
+    p(adage.pr);
+
+    adage.pr = pr; //另外一种方式
+    p(adage.pr());
+    </script>
+    <p>使用字面量为对象添加方法</p>
+    <script>
+    adage = {
+        pr: function() {
+            return "梦是一个一定要谈话的妻子，睡眠是默默忍受的丈夫。";
+        }
+    }
+    p(adage.pr);
+    p(adage.pr());
+    </script>
+    <p>使用构造函数和new运算符创建对象</p>
+    <script>
+    function student(sName, sex, major) {
+				this.sName = sName;
+				this.sex   = sex;
+				this.major = major;
+    }
+    var student1 = new student('小明', '男','新媒体');
+    var student2 = new student('小花', '女','信息可视化');
+    p(student1.major);
+    p(student2.sex);
+    </script>
+    <p>使用for……in循环枚举对象属性</p>
+    <script>
+    function student(sName, sex, major) {
+				this.sName = sName;
+				this.sex   = sex;
+				this.major = major;
+    }
+    var student1 = new student('小明', '男','新媒体');
+
+    for(var i in student1) {
+    	p(i + '=' + student1[i]);
+    }
+    </script>
+</body>
+
+</html>

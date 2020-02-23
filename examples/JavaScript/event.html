@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>event对象</title>
+    <style type="text/css" media="screen">
+        body {
+            width: 960px;
+            margin: 0 auto;
+            font: 18px/1.8em '微软雅黑';
+        }
+
+        h1 {
+            color: green;
+        }
+
+        p {
+            font-size: 20;
+            padding: 5px 0;
+            font-weight: bolder;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>event对象</h1>
+    <p>事件对象在不同的浏览器中访问的方法、其内置的属性和方法都不尽相同。比如以下代码在IE中无效：
+    </p>
+    <pre>
+    document.onclick = function(evt) {
+        for (var i = 0 in evt) {
+            console.log(i + "=" + evt[i]);
+        }
+    };
+    </pre>
+    <script>
+        document.onclick = function (evt) { //事件对象只能在对应的事件处理函数内部可以访问到
+            for (var i = 0 in evt) {
+                console.log(i + "=" + evt[i]);
+            }
+        };
+    </script>
+    <p>IE将event当作全局变量，当不过只有当事件发生时，event对象才有内容。</p>
+    <pre>
+    console.log(window.event); //null
+    window.onload = function() {
+        console.log(window.event);
+    };</pre>
+    <script>
+        console.log(window.event); //null
+        window.onload = function () {
+            console.log(window.event);
+        };
+    </script>
+</body>
+
+</html>

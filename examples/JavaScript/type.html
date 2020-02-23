@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>类型及其转换</title>
+    <script>
+        function p(s) {
+            document.write("<p class='content'>" + s + "</p>");
+        }
+    </script>
+    <style type="text/css" media="screen">
+        body {
+            width: 960px;
+            margin: 0 auto;
+            font: 18px/1.8em '微软雅黑';
+        }
+
+        h1 {
+            color: green;
+        }
+
+        h2 {
+            border-bottom: 2px solid green;
+            line-height: 1.8em;
+        }
+
+        p {
+            font-size: 20;
+            padding: 5px 0;
+            font-weight: bolder;
+        }
+
+        p.content {
+            font-weight: normal;
+            padding-left: 2em;
+            line-height: 1.5em;
+            margin: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>类型及其转换</h1>
+    <p>布尔型</p>
+    <script>
+        var condition1 = false;
+        var condition2 = 'false';
+        p(typeof condition1);
+        p(typeof condition2);
+    </script>
+    <p>Null类型</p>
+    <script>
+        var a = '';
+        var b = null;
+        p(typeof a);
+        p(typeof b); //应该输出为null，结果为object，属于bug。
+    </script>
+    <p>undefined类型</p>
+    <script>
+        var c;
+        p(typeof c);
+    </script>
+    <p>Number类型</p>
+    <script>
+        var a = 5;
+        p(typeof a);
+        var a = '5';
+        p(typeof a);
+    </script>
+    <p>String类型</p>
+    <script>
+        var a = 'JavaScript';
+        p(typeof a);
+    </script>
+    <p>Object类型</p>
+    <script>
+        p(typeof p); //function也是object
+        var obj = {};
+        p(typeof obj);
+        var a = [];
+        p(typeof a);
+    </script>
+    <p>类型转换</p>
+    <script>
+        var a = 5;
+        p(typeof a);
+        p(typeof String(a));
+        p(typeof Boolean(a));
+
+        var a = '5';
+        p(typeof a);
+        p(typeof Number(a));
+        p(typeof Boolean(a));
+        p(Boolean(a));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JavaScript类型演示</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script type="text/javascript">
+    var a = 1;              //定义变量并赋值
+    alert(typeof a);        //取得变量a的类型，并通过警告窗口显示
+    console.log(typeof a);  //在控制台中显示信息
+    var txt1 = "JavaScript";
+    console.log(typeof txt1);
+    var b = null;
+    console.log(typeof b);  //应该显示为null，但其显示为object，是JavaScript的bug
+    var c = [1, 2, 'a', 'b'];
+    console.log(typeof c);
+    </script>
+</body>
+
+</html>

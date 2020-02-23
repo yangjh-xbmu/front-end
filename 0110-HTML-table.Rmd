@@ -1,0 +1,62 @@
+# 表格元素 {#html-table}
+
+## table
+
+Table 元素用来生成表格。表格拥有行、列。
+
+## caption
+
+Caption 元素为表格元素添加标题或者说明信息，caption 应该包含在 table 元素中。
+
+``` html
+<caption>
+<p>表 1.</p>
+<p>表格说明文字。</p>
+</caption>
+```
+
+## tbody
+
+Tbody 元素用来标记表格主体。
+
+## thead
+
+thead 元素用来标记表格的表头。
+
+## tfoot
+
+Tfoot 元素用来标记表格的脚部，通常都是合计之类的信息。
+
+## tr
+
+Tr 元素用来标记表格的行。
+
+## td
+
+Td 元素用来标记表格的单元格。
+
+## th
+
+Th 元素表示表头的单元格。
+
+``` html
+<table>
+   <caption>表格说明文字</caption>
+ <thead>
+  <tr> <th> ID <th> Measurement <th> Average <th> Maximum
+ <tbody>
+  <tr> <td> <th scope=rowgroup> Cats <td> <td>
+  <tr> <td> 93 <th scope=row> Legs <td> 3.5 <td> 4
+  <tr> <td> 10 <th scope=row> Tails <td> 1 <td> 1
+ </tbody>
+ <tbody>
+  <tr> <td> <th scope=rowgroup> English speakers <td> <td>
+  <tr> <td> 32 <th scope=row> Legs <td> 2.67 <td> 4
+  <tr> <td> 35 <th scope=row> Tails <td> 0.33 <td> 1
+ </tbody>
+</table>
+```
+
+## 扩展阅读资料
+
+1. <https://www.w3.org/TR/2017/REC-html52-20171214/tabular-data.html#tabular-data>

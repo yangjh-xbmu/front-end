@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery显示隐藏特效</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    button {
+        margin: 5px 20px 5px 0;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("button:contains('显示')").click(function () {
+            $("p:first").show();
+        });
+        $("button:contains('隐藏')").click(function () {
+            $("p:first").hide();
+        });
+        $("button:contains('toggle')").click(function () {
+            $("p:first").toggle();
+        });
+        $("button:contains('duration')").click(function () {
+            $("p:first").toggle('fast');
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <h1>jQuery显示隐藏特效</h1>
+    <button>显示</button><button>隐藏</button><button>toggle</button><button>duration</button>
+    <p>不管你学习任何一项技能，选择任何一种专业，从事任何一个工作，如果你在刚接触的时候可以比较顺利达到入门，体验到些许成就感，那么你就会对它感兴趣，甚至越来越有兴趣，也会越学越好。反之，初学体验不佳将直接导致兴趣丧失。</p>
+    <p>即使存在某种技能上的天赋，如果初学体验不佳，也会造成兴趣丧失，进而技能天赋丧失。</p>
+</body>
+
+</html>

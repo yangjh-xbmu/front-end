@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>HelloVue</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <!--使用vue.js模板语法-->
+    <div id="app">{{ message }}</div>
+
+    <script>
+        // 创建一个vue实例，
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
+</body>
+
+</html>

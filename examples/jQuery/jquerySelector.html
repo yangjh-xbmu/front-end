@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery中CSS选择符的用法</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+    
+    h1 {
+        color: green;
+    }
+    
+    .red {
+        color: red;
+    }
+    
+    .center {
+        text-align: center;
+    }
+    
+    .even {
+        background-color: #ccc;
+    }
+    </style>
+    <script>
+    jQuery(document).ready(function() {
+        // jQuery能使用CSS选择符选择特定的元素
+        $("#demo").addClass('red');
+        // :contains()选择符
+        $("p:contains('.contains')").addClass('red');
+        // :eq()选择符
+        $('p:eq(1)').addClass('center');
+        $('li:gt(0)').css('backgroundColor', 'yellow');
+        $('li:lt(1)').css('backgroundColor', 'yellow');
+        $('div:has("p")').addClass('red');
+        $(":header").css('backgroundColor', 'yellow');
+        $("tr:even").addClass('even');
+    });
+    </script>
+</head>
+
+<body>
+    <h1 id="demo" class="center">jQuery使用CSS选择符选择特定节点</h1>
+    <p>jQuery使用CSS中的选择符，比如ID选择符，选择特定节点。</p>
+    <p>jQuery还可以使用.contains()选择含有特定内容的元素。</p>
+    <ul>
+        <li>:eq()</li>
+        <li>:gt()</li>
+        <li>:lt()</li>
+    </ul>
+    <div>
+        <p>jQuery中新增了:has()选择符</p>
+    </div>
+    <h2>jQuery可通过:header选择所有的标题元素</h2>
+    <table>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+            <td>单元格</td>
+        </tr>
+    </table>
+</body>
+
+</html>

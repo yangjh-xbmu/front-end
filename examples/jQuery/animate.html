@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery自定义动画</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    p {
+        width: 400px;
+        height: 90px;
+    }
+
+    div {
+        border: 1px red solid;
+        border-radius: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery自定义动画</h1>
+    <div>
+        <p>
+            jQuery自定义动画更加灵活，可以同时对多个属性设置动画效果
+        </p>
+    </div>
+    <script>
+    $('p').click(function() {
+        var paraWidth = $('p').outerWidth();
+        var $switcher = $(this).parent();
+        var switcherWidth = $switcher.outerWidth();
+        $switcher
+            .css({
+                position: 'relative'
+            })
+            .animate({
+                width: '50%'
+            }, 'slow')
+            .animate({
+                left: switcherWidth - paraWidth
+            }, 'slow')
+            .animate({
+                height: '+=20px'
+            }, 'slow')
+            .animate({
+                borderWidth: '5px'
+            }, 'slow');
+    });
+    </script>
+</body>
+
+</html>

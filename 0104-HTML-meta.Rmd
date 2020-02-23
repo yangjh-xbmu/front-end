@@ -1,0 +1,131 @@
+# 文档元数据相关元素 {#html-meta}
+
+## head
+
+`head`元素是`html`元素的第一个子元素，用来标记`HTML`文档的一系列元数据（如文档标题、作者、关键词、相关样式表、相关脚本等等）。
+
+``` html
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+ </head>
+ <body>
+ ...
+```
+
+## title
+
+`title`元素位于`head`元素之中，用来标记整个 HTML 文档的标题或名称，`title`元素不得重复出现。
+
+## base
+
+`base`元素位于`head`元素之中，通过`href`属性设定文档基准 URL、通过`target`属性设定文档中所有超级链接的默认打开方式。
+如：
+
+``` html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This is an example for the <base> element</title>
+        <base href="http://www.example.com/news/index.html">
+    </head>
+    <body>
+        <p>Visit the <a href="archives.html">archives</a>.</p>
+    </body>
+</html>
+```
+
+上例中`base`元素`href`的值必须为绝对地址。p 元素中的超级链接最终实际地址为：
+
+``` html
+ "http://www.example.com/news/archives.html"
+```
+
+以下代码将使得网页中超级链接的打开方式设定为新建窗口打开：
+
+``` html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This is an example for the &lt;base&gt; element</title>
+
+        <base target="_blank" />
+    </head>
+    <body>
+        <p>Visit the <a href="http://www.baidu.com">archives</a>.</p>
+        <p>Visit the <a href="http://www.baidu.com" target="_self">archives</a>.</p>
+    </body>
+</html>
+```
+
+上例中的第一个超级链接将在新建窗口打开，第二个超级链接将在自身窗口打开。
+
+## link
+
+`link`元素位于`head`元素中，用来连接和当前文档相关的外部资源。`link`元素必须指定`rel`属性。如：
+
+``` html
+<link rel="stylesheet" href="main.css" type="text/css">
+```
+
+## meta
+
+`meta`元素用来标记不能被`title、base、link、style 和 script`元素标记的其他各种元数据，如网页关键词、版权信息、页面编码信息等等，最常见的是通过`meta`元素设定页面的编码信息：
+
+``` html
+<meta charset="UTF-8">
+```
+
+字符编码是一项极为复杂的主题，字符编码指示文件将显示什么字符，在选择一种字符编码之前，必须确保所使用的文本编辑器能够使用这种编码方式保存文档（Sunlime Text 编辑器的默认编码方式就是 UTF-8）。Unicode 是一种表示所有字母和符号的可靠方式，Unicode 目前支持超过 99000 个字符！
+
+`meta`元素除了拥有全局性属性外，还可设定`name、http-equiv、content`值。
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <!-- 指定页面编码方式 -->
+  <meta charset="utf-8">
+  <!-- 设定浏览器使用最新内核 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- 设定 HTML 文档的关键词 -->
+  <meta name="keywords" content="HTML5 技术">
+  <!-- 设定 HTML 文档的描述信息 -->
+  <meta name="description" content="HTML5 技术学习及练习">
+  <!-- 设定文档每隔 3 秒自动刷新频率 -->
+  <meta http-equiv="Refresh" content="3">
+  <!-- 设定文档在 1 秒后跳转到指定网址 -->
+  <meta http-equiv="Refresh" content="1; URL=page4.html">
+  <title>meta 元素实例</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+##style
+
+`style`元素是`head`元素的子元素，用来设定 HTML 文档的内部样式表。
+
+``` html
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <title>My favorite book</title>
+  <style>
+   body { color: black; background: white; }
+  </style>
+ </head>
+ <body>
+  <p>My <em>favorite</em> book of all time has <em>got</em> to be
+  <cite>A Cat's Life</cite>. It is a book by P. Rahmel that talks
+  about the <i lang="la">Felis Catus</i> in modern human society.</p>
+ </body>
+</html>
+```
+
+## 扩展阅读资料
+
+1. <https://www.w3.org/TR/2017/REC-html52-20171214/document-metadata.html#document-metadata>

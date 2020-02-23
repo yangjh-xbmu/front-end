@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOM事件监听函数</title>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    p {
+        font-size: 20;
+        padding: 5px 0;
+        font-weight: bolder;
+    }
+    </style>
+    <script>
+    // 定义全局变量
+    var oP;
+    window.onload = function() {
+        //获取具体的对象
+        oP = document.getElementById('myP');
+        // 添加监听函数
+        oP.addEventListener("click",fnClick1,false);
+        // 可以为某个事件添加多个监听函数
+        oP.addEventListener("click",fnClick2,false);
+    }
+    function fnClick1 () {
+        alert('这是fnClick1函数');
+        // oP.removeEventListener("click",fnClick2,false);
+    }
+    function fnClick2 () {
+        alert('这是fnClick2函数');
+    }
+    </script>
+</head>
+
+<body>
+    <div>
+        <p id="myP">请点击我。</p>
+    </div>
+</body>
+
+</html>

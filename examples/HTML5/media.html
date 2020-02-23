@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>嵌入视音频练习</title>
+</head>
+
+<body>
+    <h1>嵌入音、视频的不同方式</h1>
+    <div>
+        <h2>使用audio元素嵌入音频</h2>
+        <audio src="media/Backroad.ogg" controls> </audio>
+    </div>
+    <div>
+        <h2>使用video元素嵌入视频</h2>
+        <video src="media/back.ogv" controls poster="media/snap.png"></video>
+    </div>
+    <div>
+        <h2>使用embed元素嵌入flash</h2>
+        <embed src="media/css-change-colors.swf" type="application/x-shockwave-flash" width="1024" height="798"
+            allowscriptaccess="always" allowfullscreen="true"> </embed>
+    </div>
+    <div>
+        <h2>使用多种视频格式</h2>
+        <video width="320" height="240" controls>
+            <!-- Firefox -->
+            <source src="media/back.ogv" type="video/ogg" />
+            <!-- Safari/Chrome-->
+            <source src="media/back.mp4" type="video/mp4" />
+            <!-- 如果浏览器不支持video标签，则使用flash -->
+            <embed src="http://blip.tv/play/gcMVgcmBAgA%2Em4v" type="application/x-shockwave-flash" width="1024"
+                height="798" allowscriptaccess="always" allowfullscreen="true"> </embed>
+        </video>
+    </div>
+</body>
+
+</html>

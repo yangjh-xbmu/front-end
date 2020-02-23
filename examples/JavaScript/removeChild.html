@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>删除节点</title>
+    <script>
+    function p(s) {
+        document.write("<p class='content'>" + s + "</p>");
+    }
+    </script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    h2 {
+        border-bottom: 2px solid green;
+        line-height: 1.8em;
+    }
+
+    p {
+        font-size: 20;
+        padding: 5px 0;
+        font-weight: bolder;
+    }
+
+    p.content {
+        font-weight: normal;
+        padding-left: 2em;
+        line-height: 1.5em;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body onload="removeLi()">
+	<ul id="myList">
+		<li>HTML</li>
+		<li>CSS</li>
+		<li id="active" title="JavaScript是脚本编程语言">JavaScript</li>
+	</ul>
+	<script>
+	function removeLi() {
+		var oLi = document.getElementById('active');
+        oLi.parentNode.removeChild(oLi);
+	}
+	</script>
+</body>
+</html>

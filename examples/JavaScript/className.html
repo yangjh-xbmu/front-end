@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>className属性</title>
+    <script>
+    function p(s) {
+        document.write("<p class='content'>" + s + "</p>");
+    }
+    </script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+    .demo {
+        text-decoration: underline;
+    }
+    .jsdemo {
+        color:red;
+    }
+    </style>
+</head>
+
+<body onload="myClass()">
+	<ul id="myList">
+		<li>HTML</li>
+		<li>CSS</li>
+		<li id="active" class="demo">JavaScript</li>
+	</ul>
+	<script>
+	function myClass() {
+		var oLi = document.getElementById('active');
+        console.log(oLi.className);
+        oLi.className += ' jsdemo';
+        console.log(oLi.className);
+	}
+	</script>
+</body>
+</html>

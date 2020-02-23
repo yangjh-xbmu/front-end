@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用jQuery实现全选、反选</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>使用jQuery实现全部选择与反选</h1>
+    <p>
+        原理：使用each()方法为众多同类型元素添加方法，使用prop()方法获取并设置属性。
+    </p>
+    <p>
+        <input type="checkbox" name="gid[]" value="1" />1
+        <input type="checkbox" name="gid[]" value="2" />2
+        <input type="checkbox" name="gid[]" value="3" />3
+        <input type="checkbox" name="gid[]" value="4" />4
+        <input type="checkbox" name="gid[]" value="5" />5
+    </p>
+    <input type="checkbox" name="chk_all" id="chk_all" />全选/取消全选
+    <script>
+    $(function() {
+        // 为按钮添加单击事件处理函数
+        $('#chk_all').click(function() {
+            // 为每个input添加函数
+            $('p input').each(function() {
+                // 将按钮的值传递给checkbox
+                $(this).prop('checked', $('#chk_all').prop("checked"));
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

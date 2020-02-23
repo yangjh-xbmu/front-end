@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>z-index属性演示</title>
+    <style type="text/css">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font-family: 微软雅黑;
+        font-size: 18px;
+        line-height: 1.8em;
+    }
+
+    h1 {
+        color: green;
+    }
+
+    div {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+    }
+
+    .index1 {
+        position: absolute;
+        left: 150px;
+        top: 150px;
+        background-color: #aaa;
+    }
+
+    .index2 {
+        background-color: #ccc;
+        position: absolute;
+        left: 190px;
+        top: 190px;
+    }
+
+    .index3 {
+        position: absolute;
+        left: 230px;
+        top: 230px;
+        z-index: 3;
+        background-color: #eee;
+    }
+
+    .index4 {
+        z-index: 4;
+        background-color: #999;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>z-index属性只对使用了position属性的元素有效</h1>
+    <div class="index4">z-index: 4</div>
+    <div class="index1">z-index: 1</div>
+    <div class="index2">z-index: 2</div>
+    <div class="index3">z-index: 3</div>
+</body>
+
+</html>

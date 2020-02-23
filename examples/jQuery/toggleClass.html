@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>toggleClass方法练习</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    .highlight {
+        background: yellow;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("p").on("click", function () {
+           $(this).toggleClass('highlight');
+        })
+    });
+    </script>
+</head>
+
+<body>
+    <h1>toggleClass方法练习</h1>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+</body>
+
+</html>

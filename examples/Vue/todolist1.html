@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>todolist1</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+    <style>
+        #app {
+            font-family: "Avenir", Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 60px;
+        }
+
+        .finished {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<!-- 这个html文件使用vue模板，将数据渲染到页面中 -->
+
+<body>
+    <!--使用vue.js模板语法-->
+    <div id="app">
+        <h1 v-text="title"></h1>
+        <ul>
+            <li v-for="item in items" v-bind:class="{finished: item.isFinished}">
+                {{item.label}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // 创建一个vue实例，
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    title: 'this is a todo list',
+                    items: [
+                        {
+                            label: 'coding',
+                            isFinished: false
+                        },
+                        {
+                            label: 'reading',
+                            isFinished: true
+                        },
+                        {
+                            label: 'writing',
+                            isFinished: false
+                        }
+                    ]
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>

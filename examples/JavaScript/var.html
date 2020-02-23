@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>var</title>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    h2 {
+        border-bottom: 2px solid green;
+        line-height: 1.8em;
+    }
+
+    p {
+        font-size: 20;
+        padding: 5px 0;
+    }
+
+    p.content {
+        font-weight: normal;
+        padding-left: 2em;
+        line-height: 1.5em;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <script>
+    "use strict";
+    var x = 1; {
+        var x = 2;
+        console.log(x);
+    }
+
+    console.log(x); // 输出 2
+
+    function varTest() {
+        var x = 1;
+        if (true) {
+            var x = 2; // 同样的变量!
+            console.log(x); // 2
+        }
+        console.log(x); // 2
+    }
+
+    function letTest() {
+        let x = 1;
+        if (true) {
+            let x = 2; // 不同的变量
+            console.log(x); // 2
+        }
+        console.log(x); // 1
+    }
+    varTest();
+    letTest();
+    </script>
+</body>
+
+</html>

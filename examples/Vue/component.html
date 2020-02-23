@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue中的组件</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+        <ol>
+            <!-- todo-item 就是组件，数据groceryList从父作用域app7传到子组件todo-item -->
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+    <script>
+    // 使用component方法定义全局组件，组件名为todo-item，组件的内容在template属性中定义
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+    // 创建实例，将其挂载到div#app-7元素
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { id: 0, text: '蔬菜' },
+                { id: 1, text: '奶酪' },
+                { id: 2, text: '随便其他什么人吃的东西' }
+            ]
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>回调函数</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+    function testCallback(callback) {
+        alert('come in!');
+        callback();
+        return 'a';
+    }
+
+    /**
+     * 被回调的函数
+     */
+    function a() {
+        alert('a');
+    }
+    // testCallback();
+    testCallback(a);
+    </script>
+</body>
+
+</html>

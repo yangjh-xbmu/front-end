@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue中的子组件</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用自定义的组件 -->
+        <myheader></myheader>
+    </div>
+    <script>
+    var myHeaderChild = {
+        template: '<p>this is a child component</p>'
+    }
+    var myHeader = {
+        // 在组件中调用子组件
+        template: '<p>this is my header<headerchild></headerchild></p>',
+        // 在组件中还可以定义子组件
+        components: {
+            'headerchild': myHeaderChild
+        }
+    }
+    var app = new Vue({
+        el: '#app',
+        // 使用定义子组件的属性components定义子组件
+        components: {
+            'myheader': myHeader
+        }
+    })
+    </script>
+</body>
+
+</html>
