@@ -113,4 +113,8 @@ knitr::include_graphics('images/what-is-front-end-dev.png')
 
 1. [vue.js](https://cn.vuejs.org/)
 1. [nest.js](https://cn.vuejs.org/)
-1. [vue.js](https://cn.vuejs.org/)
+
+### 作品赏析
+
+1. [2020记忆](https://2019ncovmemory.github.io/nCovMemory/)
+1. [wuhan2020](https://wh.opensource-service.cn/#/)
