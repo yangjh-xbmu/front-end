@@ -1,0 +1,116 @@
+---
+title: "前端开发2020版"
+author: "杨志宏"
+date: "修订于：`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  html_document:
+    df_print: paged
+bibliography:
+- book.bib
+- packages.bib
+description: 掌握前端开发的基础知识
+documentclass: ctexbook
+geometry:
+- a4paper
+- tmargin=2.5cm
+- bmargin=2.5cm
+- lmargin=3.5cm
+- rmargin=2.5cm
+github-repo: yangjh-xbmu/front-end
+link-citations: yes
+lof: yes
+lot: yes
+colorlinks: yes
+biblio-style: GBT7714-2005
+---
+
+# 前言 {-}
+
+## 什么是前端网络开发
+
+前端网络开发（Front-end Web Development）是和后端开发相对应的概念，另外一个相关的概念是全栈（Full Stack）。简单来说，前端开发的主要工作是负责和用户进行交互，为用户呈现信息。
+
+```{r front-end, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='前端与后端<br/>图片来源：<https://www.upwork.com/hiring/development/front-end-developer/>', fig.align='center'}
+knitr::include_graphics('images/what-is-front-end-dev.png')
+```
+
+## 本书的特点
+
+前端技术发展很快，几乎每年都有新的技术涌现，这使得传统出版方式很难适应潜在读者的需求，因为传统出版物经过一套流程走下来，可能就得一两年，当书和读者见面时，内容已经需要调整。另外，传统纸质出版物很难和读者进行交互，而前端开发的学习不可能只靠阅读来实现，如果能为读者提供实践手段，将会大大提高学习效率。
+
+使用Bookdown、GitBook这类新兴的出版方式，能很好解决上述问题。本书将一直处于写作、更新状态，并为读者提供各种在线的实践和测试手段。
+
+## 本书的目标
+
+整合达到“不借助后端工程师，自行研发一款产品”目标所需的知识。
+
+## 在线阅读地址
+
+<http://yangjh.gitee.io/front-end>
+
+## 学习资源
+
+### 行业导航
+
+1. [前端网址导航](http://www.daqianduan.com/nav)
+
+### 技术社区
+
+1. [掘金](https://juejin.im/)
+
+### 技术专家博客
+
+1. [张鑫旭](https://www.zhangxinxu.com/wordpress/)
+1. [阮一峰](http://www.ruanyifeng.com/blog/)
+1. [大漠](https://www.w3cplus.com/)
+1. [廖雪峰](https://www.liaoxuefeng.com/)
+
+### HTML
+
+1. [mui](https://dev.dcloud.net.cn/mui/)
+1. [apicloud](https://www.apicloud.com/)
+
+### CSS
+
+1. [CSS3](https://www.w3.org/Style/CSS/Overview.en.html)
+1. [less](http://lesscss.org/)
+1. [sass](https://www.sass.hk/)
+1. [postcss；stylus](https://postcss.org/)
+
+### UI框架
+
+1. [Bootstrap](https://getbootstrap.com/)最流行UI框架
+1. [Semantic ui](https://semantic-ui.com/)语义化UI框架
+1. [LayUI](适合后端开发的前端UI)
+
+### JavaScript
+
+1. [jQuery](https://jquery.com/)
+1. [jQeruy插件库](http://www.jq22.com/)
+1. [fullpage.js](https://alvarotrigo.com/fullPage/)全屏页面的工具
+1. [swiper.js](https://swiperjs.com/) 适合移动端的全屏页面工具。
+1. [echarts.js](https://www.echartsjs.com/)可视化框架
+1. [cocos2d](https://www.cocos.com/)游戏开发引擎
+1. [node.js](http://nodejs.cn/)Chrome V8 引擎
+
+### 前端兼职
+
+1. [猪八戒](https://zbj.com)
+1. [实现](https://shixian.com/)
+
+### 工具
+
+1. [草料二维码](https://cli.im/)
+1. [CDN](https://www.bootcdn.cn/)
+1. [阿里矢量字体库](https://www.iconfont.cn/)
+1. 建构工具:[webpack](https://webpack.js.org/)、[gulp](https://gulpjs.com/)、[grunt](https://www.gruntjs.net/)
+1. 包管理工具：[nmp](https://www.npmjs.com/)、[yarn](https://yarnpkg.com/)
+1. 语法检查器:[jshint](https://jshint.com/)
+1. 测试工具：[mocha](https://mochajs.cn/)
+
+### 前端框架
+
+1. [vue.js](https://cn.vuejs.org/)
+1. [nest.js](https://cn.vuejs.org/)
+1. [vue.js](https://cn.vuejs.org/)
