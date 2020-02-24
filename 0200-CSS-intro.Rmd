@@ -1,0 +1,70 @@
+# (PART) CSS {-}
+
+# CSS 简介及学习资源 {#css-intro}
+
+CSS(Cascading Style Sheets) 层级样式表，用以控制页面样式，实现页面中元素的表现形式、区块的布局、不同设备的适应等等，是 Web 标准中实现内容和表现相分离的唯一机制。虽然 W3C 目前正式推荐的版本是其 在 2011 年发布的 CSS2.1，但由于还处于起草阶段的 CSS3 拥有更为便利和强大的表现手段，因此浏览器厂商为争夺用户，大都支持 CSS3 的特性。目前的实际工作中，CSS3 的使用已较为普遍，故而我们在学习 CSS 时，以 CSS2.1 版本为基础，兼顾 CSS3 的新特性。
+
+通过 CSS，我们可以进行页面布局，设置元素样式，还可将这些样式或者布局应用到多个元素或者多个页面中。
+
+## 使用样式表的三种方式
+
+为网页添加 CSS 样式表的方式主要有三种，分别是：外部样式表、内部样式表和内嵌样式表。最好使用外部样式表，因为外部样式表更加符合 Web 标准所主张的内容和表现相分离思想。
+
+### 外部样式表
+
+外部样式表使用 link 元素将独立的样式表文件与网页连接起来，这样创作人员就可以用一个样式表文件为多个 html 文件指定样式，大大提高工作效率。link 元素必须放在 HTML 文档的 head 元素里面。就像这样：
+
+``` html
+<head>
+<link href="global_v1.5.1.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+```
+
+这行代码的意思就是以`global_v1.5.1.css`文件作为 HTML 文档的 CSS 来源，我们将这种 CSS 文档称为外部样式表。
+
+link 元素有这样几个属性：href 用来指定外部样式表存放的地址，rel 描述的是 HTML 文件和它相连的文件之间的关系，如上例中就表示`global_v1.5.1.css`是网页的样式表。type 属性用来表述外部资源的类型，而 media 属性用来描述样式表适合的媒体类型（完整的媒体类型参见、ref{CSSmedia}）。可以通过指定 media 的值，来为打印机、屏幕阅读器、投影仪、电视机、手机等不同的上网设备分别指定适合的样式表，这也体现了 CSS 的强大之处。
+
+也可以在多种媒体中使用同一个样式表，只需要在 media 属性中以列出多种媒体名称，各个媒体名称之间用“，”隔开。例如：
+
+``` html
+<link href="global_v1.5.1.css" rel="stylesheet"  type="text/css" media="screen, projection"/>
+```
+
+以上代码的意思是使用`global_v1.5.1.css`作为文档在计算机屏幕和投影仪上显示时的样式表。
+
+### 内部样式表
+
+除了使用 link 元素链接外部样式表之外，CSS 还可以使用 style 元素将样式信息同网页结合起来，这种方式的样式表叫做内部样式表。
+
+style 元素可以直接在页面中嵌入 CSS 样式信息，而不用将它们单独作为外部样式表保存，因此并不符合内容和表现分离的 Web 标准。内部样式表在页面不多时比较方便，因为样式信息被存放在网页内部，当页面数量增加后，一旦修改，就要分别修改网页内容，这不但效率低下，而且还存在潜在的不一致风险。
+
+但如果我们就想基于全站的样式针对某个特定页面进行微调，那么使用 style 元素标记内部样式表则是不错的选择。内部样式表也需要在 head 元素中使用，例如：
+
+``` html
+<head>
+<style type="text/css" media="screen">
+……
+</style>
+</head>
+```
+
+### 内嵌样式表
+
+除了外部样式表和内部样式表之外，CSS 还提供了一种叫做内嵌样式表的机制。内嵌样式表是在具体的需要添加样式的元素中使用 style 属性。使用内嵌样式表的场合并不多见，因为同外部样式表和内部样式表相比，内嵌样式表更加不易修改。内嵌样式表的例子如下：
+
+``` html
+<div style="font-size:38px">加入微博，记录点滴</div>
+```
+
+## 在线学习资源及工具
+
+1. CSS 中文参考手册。<http://css.doyoe.com/>
+1. CSS2.1 官方文档。<https://www.w3.org/TR/2011/REC-CSS2-20110607/>
+1. CSS Color Module Level 3。<https://www.w3.org/TR/css3-color/>
+1. 学习 CSS 布局。<http://zh.learnlayout.com/>
+1. W3Cplus。 <http://www.w3cplus.com/>
+1. CSS 渐变生成器。 <http://www.cssmatic.com/gradient-generator>
+1. CSS 语法验证工具。 <http://jigsaw.w3.org/css-validator/>
+1. CSS3 动画。 <http://daneden.github.io/animate.css/>
+1. CSS 知识测试 <https://www.nowcoder.com/intelligentTest>
+1. CSS 框架 <http://www.materializecss.cn/>

@@ -51,6 +51,11 @@ knitr::include_graphics('images/what-is-front-end-dev.png')
 
 ## 学习资源
 
+### 国外课程
+
+1. <https://codepen.io/>
+1. <https://scrimba.com/>
+
 ### 行业导航
 
 1. [前端网址导航](http://www.daqianduan.com/nav)

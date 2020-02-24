@@ -1,4 +1,4 @@
-# Web 标准 {#webstandard}
+# Web 标准 {#web-standard}
 
 ## Web 标准产生背景
 

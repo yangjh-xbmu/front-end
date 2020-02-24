@@ -1,6 +1,6 @@
 # (PART) HTML {-}
 
-# HTML 简介 {#htmlhistroy}
+# HTML 简介 {#html-histroy}
 
 HTML（HyperText Markup Language，超文本标记语言）是为“网页创建和其它可在网页浏览器中看到的信息”设计的一种标记语言。
 

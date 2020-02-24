@@ -1,4 +1,4 @@
-# HTML 基础概念及规则 {#HTMLterm}
+# HTML 基础概念及规则 {#html-term}
 
 ## HTML 基本结构
 
