@@ -6,7 +6,7 @@
 
 所有 HTML 元素，在页面的呈现过程中，都遵循 CSS 制定的盒模型（Box Model），盒模型是一个包含外边距、边框线、内边距以及内容的矩形容器。具体如下图所示：
 
-```{r css-box, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='CSS 盒模型', fig.align='center'}
+```{r css-box, echo=FALSE, fig.show='hold', fig.cap='CSS 盒模型', fig.align='center'}
 knitr::include_graphics('images/box.png')
 ```
 

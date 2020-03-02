@@ -65,7 +65,7 @@
 
 这段代码的显示效果如下：
 
-```{r css-float-ex, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='浮动前的显示效果', fig.align='center'}
+```{r css-float-ex, echo=FALSE, fig.show='hold', fig.cap='浮动前的显示效果', fig.align='center'}
 knitr::include_graphics('images/beforefloat.jpg')
 ```
 
