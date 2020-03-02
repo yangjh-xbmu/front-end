@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>义工网</title>
+    <link rel="stylesheet" href="css/bulma.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header class="hero is-info">
+        <div class="columns">
+            <div class="column is-10 is-offset-1">
+                <nav class="navbar " role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a href="#">
+                            <img src="images/logo.png">
+                        </a>
+                        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                            data-target="navbarBasicExample">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                    <div id="navbarBasicExample" class="navbar-menu">
+                        <div class="navbar-start is-size-5 ">
+                            <a class="navbar-item">
+                                首页
+                            </a>
+                            <a class="navbar-item">
+                                快乐雷锋工程
+                            </a>
+                            <a class="navbar-item">
+                                优秀义工
+                            </a>
+                            <a class="navbar-item">
+                                公益感悟
+                            </a>
+                            <a class="navbar-item">
+                                新闻资讯
+                            </a>
+                            <a class="navbar-item">
+                                义工联盟
+                            </a>
+                            <a class="navbar-item">
+                                关于我们
+                            </a>
+
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>活动专区</h2>
+        </section>
+
+        <section id="web-tools" class="hero is-dark">
+            <div class="columns hero-body">
+                <div class="column is-10 is-offset-1 is-size-6">
+                    <p> <span>隐私保护</span> <span>法律声明</span> <span>网站地图</span> <span>义工招募</span> <span>友情链接</span> </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="hero is-light">
+        <div class="columns">
+            <div class="column is-10 is-offset-1 is-size-7">
+                <div class="columns">
+                    <address class="column">
+                        <span>电　话：0951-5613378 / 传　真：0951-5613379</span>
+                        <span>地　址：宁夏银川市金凤区北京中路银川文化城2期3区4栋2楼</span>
+                        <span>邮　箱：nxyglhh@163.com</span>
+                        <span>QQ群：134152573 276453984</span>
+                    </address>
+                    <p class="has-text-right column">宁夏义工联合会 Copyright © 2009 Nxyg.org. All Rights Reserved.
+                        宁ICP备
+                        12000073号-17</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Check for click events on the navbar burger icon
+            $(".navbar-burger").click(function () {
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                $(".navbar-burger").toggleClass("is-active");
+                $(".navbar-menu").toggleClass("is-active");
+
+            });
+        });
+    </script>
+</body>
+
+</html>
