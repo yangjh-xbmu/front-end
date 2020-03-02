@@ -89,7 +89,7 @@ knitr::include_graphics('images/beforefloat.jpg')
 
 显示效果如下：
 
-```{r css-floated, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='浮动效果', fig.align='center'}
+```{r css-floated, echo=FALSE, fig.show='hold', fig.cap='浮动效果', fig.align='center'}
 knitr::include_graphics('images/float.jpg')
 ```
 
@@ -149,7 +149,7 @@ knitr::include_graphics('images/float.jpg')
 
 从上面的例子中，我们清楚地看到，使用了浮动属性的元素将会影响到其后的内容。这种影响有时候是我们期望的，有时候是我们所不乐见的。如下图所示：
 
-```{r css-beforeclear, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='清除浮动前', fig.align='center'}
+```{r css-beforeclear, echo=FALSE, fig.show='hold', fig.cap='清除浮动前', fig.align='center'}
 knitr::include_graphics('images/beforeclear.jpg')
 ```
 
@@ -202,7 +202,7 @@ body {
 
 `clear` 的值有 `left`、`right`、`both` 和 `none`，其中 `left` 表示清除左浮动，`right` 表示清除右浮动，`both` 表示清除左、右两侧的浮动影响，而 `none` 表示不清除浮动。
 
-```{r css-clear, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='清除浮动', fig.align='center'}
+```{r css-clear, echo=FALSE, fig.show='hold', fig.cap='清除浮动', fig.align='center'}
 knitr::include_graphics('images/clear.jpg')
 ```
 
@@ -440,7 +440,7 @@ knitr::include_graphics('images/position.png')
 
 上例的运行结果见[在线演示案例](examples\CSS\position-absolute.html)：
 
-```{r absolute-positon, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='不同定位方式的区别', fig.align='center'}
+```{r absolute-positon, echo=FALSE, fig.show='hold', fig.cap='不同定位方式的区别', fig.align='center'}
 knitr::include_graphics('images/absolute.png')
 ```
 
@@ -529,7 +529,7 @@ left:0;
 
 上例中虽然为 `div.index4` 设定了 `z-index` 的值，但从运行效果（如下图所示）来看，这个 `z-index` 值显然没有起作用。[在线演示案例](examples\CSS\z-index.html)
 
-```{r zindex, echo=FALSE, out.width='95%', fig.show='hold', fig.cap='不同定位方式的区别', fig.align='center'}
+```{r zindex, echo=FALSE, fig.show='hold', fig.cap='不同定位方式的区别', fig.align='center'}
 knitr::include_graphics('images/z-index.png')
 ```
 
