@@ -85,7 +85,10 @@ knitr::include_graphics('images/flex-direction-row.png')
 
 主轴为水平方向，起点在右端:
 
-![CSS flexbox](../images/flex-direction-row-reverse.png)
+```{r flex-direction-row-reverse, echo=FALSE, fig.show='hold', fig.cap='flex-direction-row-reverse', fig.align='center'}
+knitr::include_graphics('images/flex-direction-row-reverse.png')
+```
+
 
 ```css
 .flex-container {
@@ -96,7 +99,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 
 主轴为垂直方向，起点在上端:
 
-![CSS flexbox](../images/flex-direction-column.png)
+```{r flex-direction-column, echo=FALSE, fig.show='hold', fig.cap='flex-direction-column', fig.align='center'}
+knitr::include_graphics('images/flex-direction-column.png')
+```
 
 ```css
 .flex-container {
@@ -107,7 +112,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 
 主轴为垂直方向，起点在下端:
 
-![CSS flexbox](../images/flex-direction-column-reverse.png)
+```{r flex-direction-column-reverse, echo=FALSE, fig.show='hold', fig.cap='flex-direction-column-reverse', fig.align='center'}
+knitr::include_graphics('images/flex-direction-column-reverse.png')
+```
 
 ### flex-wrap属性
 `flex-wrap`属性决定内容在抽线上排列不下的换行方式。
@@ -126,11 +133,11 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-wrap-nowrap.png)
+```{r flex-wrap-nowrap, echo=FALSE, fig.show='hold', fig.cap='flex-wrap-nowrap', fig.align='center'}
+knitr::include_graphics('images/flex-wrap-nowrap.png')
+```
 
 设置不换行。
-
-
 
 ```css
 .flex-container {
@@ -139,11 +146,11 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-wrap-wrap.png)
+```{r flex-wrap-wrap, echo=FALSE, fig.show='hold', fig.cap='flex-wrap-wrap', fig.align='center'}
+knitr::include_graphics('images/flex-wrap-wrap.png')
+```
 
 设置自动换行，且第一行在上方。
-
-
 
 ```css
 .flex-container {
@@ -152,7 +159,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-wrap-wrap-reverse.png)
+```{r flex-wrap-wrap-reverse, echo=FALSE, fig.show='hold', fig.cap='flex-wrap-wrap-reverse', fig.align='center'}
+knitr::include_graphics('images/flex-wrap-wrap-reverse.png')
+```
 
 设置自动换行，且第一行在下方。
 
@@ -196,7 +205,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   justify-content:         flex-start;
 }
 ```
-![CSS flexbox](../images/justify-content-flex-start.png)
+
+```{r justify-content-flex-start, echo=FALSE, fig.show='hold', fig.cap='justify-content-flex-start', fig.align='center'}
+knitr::include_graphics('images/justify-content-flex-start.png')
+```
+
 左对齐。
 
 ```css
@@ -205,7 +218,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   justify-content:         flex-end;
 }
 ```
-![CSS flexbox](../images/justify-content-flex-end.png)
+
+```{r justify-content-flex-end, echo=FALSE, fig.show='hold', fig.cap='justify-content-flex-end', fig.align='center'}
+knitr::include_graphics('images/justify-content-flex-end.png')
+```
+
 右对齐。
 
 ```css
@@ -214,7 +231,10 @@ knitr::include_graphics('images/flex-direction-row.png')
   justify-content:         center;
 }
 ```
-![CSS flexbox](../images/justify-content-center.png)
+```{r justify-content-center, echo=FALSE, fig.show='hold', fig.cap='justify-content-center', fig.align='center'}
+knitr::include_graphics('images/justify-content-center.png')
+```
+
 居中。
 
 ```css
@@ -223,7 +243,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   justify-content:         space-between;
 }
 ```
-![CSS flexbox](../images/justify-content-space-between.png)
+
+```{r justify-content-space-between, echo=FALSE, fig.show='hold', fig.cap='justify-content-space-between', fig.align='center'}
+knitr::include_graphics('images/justify-content-space-between.png')
+```
+
 两端对齐，项目之间的间隔相等。
 
 ```css
@@ -232,7 +256,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   justify-content:         space-around;
 }
 ```
-![CSS flexbox](../images/justify-content-space-around.png)
+
+```{r justify-content-space-around, echo=FALSE, fig.show='hold', fig.cap='justify-content-space-around', fig.align='center'}
+knitr::include_graphics('images/justify-content-space-around.png')
+```
+
 每个项目两侧的间隔相等。
 
 ### align-items属性
@@ -253,7 +281,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-items:         flex-start;
 }
 ```
-![CSS flexbox](../images/align-items-flex-start.png)
+
+```{r align-items-flex-start, echo=FALSE, fig.show='hold', fig.cap='align-items-flex-start', fig.align='center'}
+knitr::include_graphics('images/align-items-flex-start.png')
+```
+
 交叉轴的起点对齐。
 
 ```css
@@ -262,7 +294,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-items:         flex-end;
 }
 ```
-![CSS flexbox](../images/align-items-flex-end.png)
+
+```{r align-items-flex-end, echo=FALSE, fig.show='hold', fig.cap='align-items-flex-end', fig.align='center'}
+knitr::include_graphics('images/align-items-flex-end.png')
+```
+
 交叉轴的终点对齐。
 
 ```css
@@ -271,7 +307,12 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-items:         center;
 }
 ```
-![CSS flexbox](../images/align-items-center.png)
+
+
+```{r align-items-center, echo=FALSE, fig.show='hold', fig.cap='align-items-center', fig.align='center'}
+knitr::include_graphics('images/align-items-center.png')
+```
+
 交叉轴的中点对齐。
 
 ```css
@@ -280,7 +321,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-items:         baseline;
 }
 ```
-![CSS flexbox](../images/align-items-baseline.png)
+
+```{r align-items-baseline, echo=FALSE, fig.show='hold', fig.cap='align-items-baseline', fig.align='center'}
+knitr::include_graphics('images/align-items-baseline.png')
+```
+
 项目的第一行文字的基线对齐。
 
 ```css
@@ -289,7 +334,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-items:         stretch;
 }
 ```
-![CSS flexbox](../images/align-items-stretch.png)
+
+```{r align-items-stretch, echo=FALSE, fig.show='hold', fig.cap='align-items-stretch', fig.align='center'}
+knitr::include_graphics('images/align-items-stretch.png')
+```
+
 如果项目未设置高度或设为auto，将占满整个容器的高度。
 
 ### align-content属性
@@ -310,7 +359,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         flex-start;
 }
 ```
-![CSS flexbox](../images/align-content-flex-start.png)
+
+```{r align-content-flex-start, echo=FALSE, fig.show='hold', fig.cap='align-content-flex-start', fig.align='center'}
+knitr::include_graphics('images/align-content-flex-start.png')
+```
+
 与交叉轴的起点对齐。
 
 ```css
@@ -319,7 +372,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         flex-end;
 }
 ```
-![CSS flexbox](../images/align-content-flex-end.png)
+
+```{r align-content-flex-end, echo=FALSE, fig.show='hold', fig.cap='align-content-flex-end', fig.align='center'}
+knitr::include_graphics('images/align-content-flex-end.png')
+```
+
 与交叉轴的终点对齐。
 
 ```css
@@ -328,7 +385,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         center;
 }
 ```
-![CSS flexbox](../images/align-content-center.png)
+
+```{r align-content-center, echo=FALSE, fig.show='hold', fig.cap='align-content-center', fig.align='center'}
+knitr::include_graphics('images/align-content-center.png')
+```
+
 与交叉轴的中点对齐。
 
 ```css
@@ -337,7 +398,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         space-between;
 }
 ```
-![CSS flexbox](../images/align-content-space-between.png)
+
+```{r align-content-space-between, echo=FALSE, fig.show='hold', fig.cap='align-content-space-between', fig.align='center'}
+knitr::include_graphics('images/align-content-space-between.png')
+```
+
 与交叉轴两端对齐，轴线之间的间隔平均分布。
 
 ```css
@@ -346,7 +411,11 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         space-around;
 }
 ```
-![CSS flexbox](../images/align-content-space-around.png)
+
+```{r align-content-space-around, echo=FALSE, fig.show='hold', fig.cap='align-content-space-around', fig.align='center'}
+knitr::include_graphics('images/align-content-space-around.png')
+```
+
 每根轴线两侧的间隔都相等。
 
 ```css
@@ -355,11 +424,17 @@ knitr::include_graphics('images/flex-direction-row.png')
   align-content:         stretch;
 }
 ```
-![CSS flexbox](../images/align-content-stretch.png)
+
+```{r align-content-stretch, echo=FALSE, fig.show='hold', fig.cap='align-content-stretch', fig.align='center'}
+knitr::include_graphics('images/align-content-stretch.png')
+```
+
 轴线占满整个交叉轴。
 
 ## Flexbox项目特性
-### （一）order属性
+
+### order属性
+
 `order`属性定义项目的排列顺序。数值越小，排列越靠前，默认为`0`。
 #### Values:
 
@@ -370,7 +445,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-order.png)
+```{r flex-order, echo=FALSE, fig.show='hold', fig.cap='flex-order', fig.align='center'}
+knitr::include_graphics('images/flex-order.png')
+```
 
 ### flex-grow属性
 
@@ -385,7 +462,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-grow.png)
+```{r flex-grow, echo=FALSE, fig.show='hold', fig.cap='flex-grow', fig.align='center'}
+knitr::include_graphics('images/flex-grow.png')
+```
 
 如果所有项目的`flex-grow`属性都为`1`，则它们将等分剩余空间（如果有的话）。如果一个项目的`flex-grow`属性为`2`，其他项目都为`1`，则前者占据的剩余空间将比其他项多一倍。
 
@@ -402,7 +481,9 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-![CSS flexbox](../images/flex-shrink.png)
+```{r flex-shrink, echo=FALSE, fig.show='hold', fig.cap='flex-shrink', fig.align='center'}
+knitr::include_graphics('images/flex-shrink.png')
+```
 
 如果所有项目的`flex-shrink`属性都为1，当空间不足时，都将等比例缩小。如果一个项目的`flex-shrink`属性为0，其他项目都为1，则空间不足时，前者不缩小。
 
@@ -449,7 +530,8 @@ knitr::include_graphics('images/flex-direction-row.png')
 }
 ```
 
-## 参考信息：
+## 参考资料
+
 1. [https://www.w3.org/html/ig/zh/css-flex-1/#intro](https://www.w3.org/html/ig/zh/css-flex-1/#intro)
 1. [http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 1. [https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties](https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties)
