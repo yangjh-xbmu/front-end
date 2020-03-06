@@ -1,4 +1,4 @@
-# flexbox
+# Flexbox
 
 ```{r flexbox, echo=FALSE, fig.show='hold', fig.cap='Flex box布局', fig.align='center'}
 knitr::include_graphics('images/css-flexbox.png')

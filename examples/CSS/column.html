@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分栏布局</title>
+    <style>
+        body {
+            width: 90%;
+            max-width: 900px;
+            margin: 4em auto;
+            font: .9em/1.2 Arial;
+        }
+
+        .container {
+            /* column-count: 4; */
+            column-width: 250px;
+            column-gap: 20px;
+            column-rule: 2px dotted #333;
+        }
+
+        h2 {
+            column-span: all;
+            background-color: rgba(51, 51, 51, 0.377);
+            color: black;
+            padding: .5em;
+        }
+
+        .card {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            background-color: rgba(51, 51, 51, 0.11);
+
+            padding: 10px;
+            margin: 0 0 1em 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>飞鸟集</h1>
+        <p>1</p>
+        <p>夏天的飞鸟，飞到我的窗前唱歌，又飞去了。</p>
+        <p>秋天的黄叶，它们没有什么可唱，只叹息一声，飞落在那里。</p>
+        <p>stray birds of summer come to my window to sing and fly away.</p>
+        <p>and yellow leaves of autumn, which have no songs, flutter and fall</p>
+        <p>there with a sign.</p>
+        <p>2</p>
+        <p>世界上的一队小小的漂泊者呀，请留下你们的足印在我的文字里。</p>
+        <p>o troupe of little vagrants of the world, leave your footprints in my words.</p>
+        <p>3</p>
+        <p>世界对着它的爱人，把它浩翰的面具揭下了。</p>
+        <p>它变小了，小如一首歌，小如一回永恒的接吻。</p>
+        <p>the world puts off its mask of vastness to its lover.</p>
+        <p>it becomes small as one song, as one kiss of the eternal.</p>
+        <p>4</p>
+        <p>是大地的泪点，使她的微笑保持着青春不谢。</p>
+        <p>it is the tears of the earth that keep here smiles in bloom.</p>
+        <p>5</p>
+        <p>无垠的沙漠热烈追求一叶绿草的爱，她摇摇头笑着飞开了。</p>
+        <p>the mighty desert is burning for the love of a bladeof grass who</p>
+        <p>shakes her head and laughs and flies away.</p>
+        <p>6</p>
+        <p>如果你因失去了太阳而流泪，那么你也将失去群星了。</p>
+        <p>if you shed tears when you miss the sun, you also miss the stars.</p>
+        <h2>跨栏标题</h2>
+        <div class="card">
+            <p>7</p>
+            <p>跳舞着的流水呀，在你途中的泥沙，要求你的歌声，你的流动呢。你肯挟瘸足的泥沙而俱下么？</p>
+            <p>the sands in your way beg for your song and your movement, dancing</p>
+            <p>water. will you carry the burden of their lameness?</p>
+        </div>
+
+        <div class="card">
+            <p>8</p>
+            <p>她的热切的脸，如夜雨似的，搅扰着我的梦魂。</p>
+            <p>her wishful face haunts my dreams like the rain at night.</p>
+        </div>
+        <p>9</p>
+        <p>有一次，我们梦见大家都是不相识的。</p>
+        <p>我们醒了，却知道我们原是相亲相爱的。</p>
+        <p>once we dreamt that we were strangers.</p>
+        <p>we wake up to find that we were dear to each other.</p>
+        <p>10</p>
+        <p>忧思在我的心里平静下去，正如暮色降临在寂静的山林中。</p>
+        <p>sorrow is hushed into peace in my heart like the evening among</p>
+        <p>the silent trees.</p>
+        <p>11</p>
+        <p>有些看不见的手，如懒懒的微风似的，正在我的心上奏着潺潺的乐声。</p>
+        <p>some unseen fingers, like an idle breeze, are playing upon my heart</p>
+        <p>the music of the ripples.</p>
+        <p>12</p>
+        <p>“海水呀，你说的是什么？”</p>
+        <p>“是永恒的疑问。”</p>
+        <p>“天空呀，你回答的话是什么？”</p>
+        <p>“是永恒的沉默。”</p>
+        what language is thine, o sea?the language of eternal question.what language is thy <p>answer, o sky?the
+            language of eternal silence.</p>
+
+    </div>
+
+</body>
+
+</html>

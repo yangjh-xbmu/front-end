@@ -1,0 +1,75 @@
+# CSS layout
+
+## 分栏布局
+
+分栏布局提供了一种将内容按列排列的方法，就像在报纸上看到的那样。但是创建的列不能单独设置样式，无法使一列比其他列大，或更改单个列的背景或文本颜色。
+
+[案例](examples\CSS\column.html)
+
+其中：
+
+1. `column-count` 属性用来设置列的数量。浏览器可以计算并分配每个列的空间。
+1. `column-width` 属性用来指定列的宽度。浏览器将为提供指定大小的列。然后，剩余的空间将在现有列之间共享。
+1. `column-gap` 属性用来更改列之间的间距大小。
+1. `column-rule` 属性用来指定列之间的边框，接受同`border`的值。
+1. `column-span` 属性可以实现元素跨越所有栏。值为none和all。多栏会中断，并在跨栏元素之后继续创建新的列框集。
+
+还可以使用`break-inside:avoid`的属性，控制多栏之间内容的中断方式。
+
+## 网格布局
+
+网格（Grid）是水平线和垂直线的集合，使用网格排版，可使元素在页面之间移动时不会跳动或改变宽度，从而在网站上提供更高的一致性。要定义网格，需要将`display`的值设为`grid`。
+
+### 指定列的数量
+
+通过 `grid-template-columns` 属性可在网格中添加列。其值可以是固定值，也可以是柔性的`fr`，还可以通过`repeat()`函数指定。
+
+```css
+grid-template-columns: 200px 200px 200px;
+grid-template-columns: 2fr 1fr 1fr;
+grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+```
+
+### 网格之间的间距
+
+使用属性`grid-column-gap`来表示列之间的间隙，`grid-row-gap`为行的间隙，`grid-gap`可同时设置两者。这些间隙可以是任何长度单位或百分比，但不能是fr单位。
+
+### 网格的大小
+
+默认根据内容生成宽和高，但也可以通过`grid-auto-rows`和`grid-auto-columns`来指定大小。`minmax()`函数可让我们设置最小和最大值。
+
+[案例](examples\CSS\grid.html)
+
+### 基于行的位置设置
+
+我们可以通过指定开始和结束行来根据这些行放置内容。
+
+1. `grid-column-start`
+1. `grid-column-end`
+1. `grid-row-start`
+1. `grid-row-end`
+
+这些属性都可以使用行号作为值。还可以使用速记属性，一次指定起始行和结束行，并以斜杠字符分隔。
+
+1. `grid-column`
+1. `grid-row`
+
+[案例](examples\CSS\grid-placement.html)
+
+### 网格模板区域
+
+在网格上放置项目的另一种方法是使用`grid-template-areas`属性，并为设计的各个元素命名。规则如下：
+
+1. 需要填充网格的每个单元格。
+1. 要跨越两个单元格，请重复该名称。
+1. 若要使一个单元格为空，请使用`.`。
+1. 区域必须为矩形。
+1. 区域不能在不同的位置重复。
+
+[案例](examples\CSS\grid-template.html)
+
+## 参考资料
+
+1. <https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Multiple-column_Layout>
+1. <https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids>
