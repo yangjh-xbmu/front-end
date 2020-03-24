@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo 案例</title>
+    <style>
+        .empty {
+            border-color: red;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="value" v-bind:class="{empty:!count}">
+        <input type="button" value="发送" v-on:click="send">
+        <div>value 的值是：{{ value }}</div>
+        <div>value 的字数：{{ count }}</div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return { value: '' }
+            },
+            methods: {
+                send: function () {
+                    if (this.value == '') {
+                        alert('没有值！');
+                    } else {
+                        alert('发送成功');
+                        this.value = ''
+                    }
+
+                }
+            },
+            computed: {
+                count: function () {
+                    return this.value.length
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

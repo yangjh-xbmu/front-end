@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Todo</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+
+        .selected {
+            color: red;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="todo-app">
+        <div>
+            <input type="button" value="全部标为完成" @click="markAllasCompleted" />
+            <input type="text" placeholder="添加 todo" v-model="newTodoTitle" @keyup.enter="addTodo" />
+        </div>
+        <!-- todo list -->
+        <ul>
+            <li v-for="todo in filteredTodos" v-bind:key="todo.id">
+                <span v-bind:class="{completed:todo.completed}" @dblclick="editTodo(todo)">{{ todo.title }}</span>
+                <input type="button" value="标为完成" @click="markAsCompleted(todo)">
+                <input type="button" value="删除" @click="removeTodo(todo)">
+                <input type="text" value="编辑 todo..." v-if="editedTodo !=null && editedTodo.id ==todo.id"
+                    v-model="todo.title" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)" v-focus="true" />
+            </li>
+        </ul>
+
+        <!-- end todo list -->
+        <div>
+            <span>剩余 {{uncompletedTodos}} 项未完成 ---</span>
+            <span>筛选：
+                <input type="button" :class="{selected:intention == 'all'}" value="全部" @click="intention = 'all'">
+                <input type="button" value="进行中" @click="intention = 'ongoing'"
+                    :class="{selected:intention == 'ongoing'}">
+                <input type="button" value="已完成" @click="intention = 'finished'"
+                    :class="{selected:intention == 'finished'}">
+                <input type="button" value="清除已完成" @click="clearCompleted">
+                <input type="button" value="清除全部" @click="clearAll">
+            </span>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        let id = 0;
+        var app = new Vue({
+            el: '#todo-app',
+            data: function () {
+                return {
+                    todos: [],
+                    newTodoTitle: '',
+                    editedTodo: null,
+                    intention: 'all'
+                }
+            },
+            methods: {
+                addTodo: function () {
+                    this.todos.push({ id: id++, title: this.newTodoTitle, completed: false });
+                    this.newTodoTitle = '';
+                },
+                markAsCompleted: function (todo) {
+                    if (todo.completed == false) {
+                        todo.completed = true;
+                    } else {
+                        todo.completed = false;
+                    }
+                },
+                removeTodo: function (todo) {
+                    this.todos.splice(this.todos.indexOf(todo), 1)
+                },
+                editTodo: function (todo) {
+                    this.editedTodo = { id: todo.id, title: todo.title, completed: todo.completed }
+                },
+                editDone: function (todo) {
+                    this.editedTodo = null
+                },
+                cancelEdit: function (todo) {
+                    todo.title = this.editedTodo.title;
+                    this.editedTodo = null
+                },
+                markAllasCompleted: function () {
+                    this.todos.map(function (todo) {
+                        if (!todo.completed) {
+                            todo.completed = true
+                        }
+                    })
+                },
+                clearCompleted: function () {
+                    this.todos = this.todos.filter(todo => !todo.completed)
+                },
+                clearAll: function () {
+                    this.todos = []
+                }
+            },
+            directives: {
+                focus: {
+                    inserted: function (el) {
+                        el.focus()
+                    }
+                }
+            },
+            computed: {
+                uncompletedTodos: function () {
+                    return this.todos.filter(todo => !todo.completed).length
+                },
+                filteredTodos: function () {
+                    if (this.intention === 'ongoing') {
+                        return this.todos.filter(todo => !todo.completed)
+                    } else if (this.intention === 'finished') {
+                        return this.todos.filter(todo => todo.completed)
+                    } else {
+                        return this.todos
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
