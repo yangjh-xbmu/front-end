@@ -1,0 +1,368 @@
+# 全局对象
+
+这一章节介绍 JavaScript 内置的对象，包括它们的方法和属性。
+
+按照类别，全局对象可分为：
+
+1. 值的属性
+2. 函数属性
+3. 基础对象
+4. 数字和日期
+5. 文字处理
+6. 索引数据集
+7. 键值类数据集
+8. 向量类数据集
+9. 结构化数据
+10. 控制抽象对象
+11. 反射
+12. 国际化
+13. Web汇编
+14. 参数对象
+
+## 浏览器对象模型BOM
+
+由于网页是在浏览器中运行的，因此JavaScript提供了一系列对象以便同浏览器窗口进行交互。这些对象有window、navigator、location、document、screen和history等，这些对象通称为浏览器对象模型（Browser Object Model），简称BOM。
+
+BOM提供了独立于页面内容而与浏览器窗口进行交互的对象，其中window对象是整个BOM的核心，所有对象和集合都以某种方式与window对象关联。
+
+navigator、location、document、screen和history是windows对象的子集，document对象又包含若干子对象（location、forms、anchors、images、links、embeds、applets），BOM中的对象关系如图所示：
+
+![BOM对象关系图](../images/BOM.png)
+
+### window对象
+
+JavaScript在一定的环境中运行，这个运行环境本身也是对象，称为“顶层对象”。这就是说，JavaScript的所有对象，都是“顶层对象”的下属。不同的运行环境有不同的“顶层对象”，在浏览器环境中，这个顶层对象就是window对象。
+
+Window对象表示整个浏览器窗口，但不包括其中的页面内容，使用window对象可以直接对浏览器窗口进行操作。window对象提供可以主要功能有：调整窗口大小和位置；打开新窗口和关闭窗口；系统提示框；状态栏控制；定时操作。由于window对象的属性和方法众多，我们就不一一作介绍，如想深入了解，请访问<https://developer.mozilla.org/zh-CN/docs/Web/API/Window>。
+
+#### 常用属性
+
+Window对象拥有众多属性，常用的有：
+
+25. **innerHeight** 浏览器显示区域高度
+26. **innerWidth** 浏览器显示区域宽度
+27. **document** window对象的子对象document是javascript的核心对象，HTML文档中包含BODY元素时就会创建一个document实例。
+28. **location** 给出当前窗口的URL信息或指定打开窗口的URL。
+
+#### 常用方法
+
+34. **close()** 关闭页面。
+35. **open()** 打开页面。
+36. **alert()** 弹出警告对话框。
+37. **print()** 模拟用户点击浏览器上的“打印”按钮，通知浏览器打开打印对话框打印当前页。
+38. **confirm()** 显示需要用户确认信息的对话框。
+39. **scrollTo()** 将窗口中的内容滚动到指定位置。
+40. **scrollByPages()** 滚动当前文档到指定页。
+41. **setTimeout()** 在指定的延迟时间之后调用一个函数或执行一个代码片段。
+42. **setInterval()** 周期性地调用一个函数(function)或者执行一段代码。
+
+window对象的属性和方法在调用时，可以省略其对象名称，即window.innerHeight可简写为innerHeight。
+
+例如：
+
+```html
+<html>
+<body>
+<input type="text" id="clock" />
+<script language=javascript>
+var int = setInterval("clock()",50);
+function clock() {
+  var t = new Date();
+  document.getElementById("clock").value = t
+  }
+</script>
+<button onclick="int=window.clearInterval(int)">Stop interval</button>
+</body>
+</html>
+```
+
+### navigator对象
+
+navigator对象主要用来检查客户端浏览器信息、浏览器版本、操作系统的类型等等。navigator对象最常用的属性是userAgent，该属性能读取浏览器及操作系统的信息。
+
+### location对象
+
+location对象的主要作用是分析和设置页面的URL地址，其中location.herf属性用于获得和设置窗口的URL。
+
+### screen对象
+
+screen对象主要用来获取用户计算机的屏幕信息，包括屏幕的分辨率、屏幕的颜色深度等信息。
+
+### history对象
+
+history对象主要用来控制浏览器的后退和前进。它可以访问历史页面，但不能获取历史页面的URL。
+
+### document对象
+
+从BOM的角度看，document对象是一系列集合构成，这些集合可以访问文档的各个部分，并提供页面自身的信息。由于BOM没有统一标准，各种浏览器中的document对象特性并不完全相同，因此要使用各类浏览器都支持的通用属性和方法。常用的属性和方法有title、lastModified、write等等。
+
+## DOM
+
+文档对象模型DOM（Document Object Module）是由W3C定义的提供与任何HTML或XML文档进行交互的API（编程接口），可以说是HTML之后的又一伟大创新。它使得用户可以通过javaScript访问HTML文档中的任意元素和内容，DOM提供的接口可以操作HTML文件中的节点。当浏览器加载一个网页后，这个网页就可以看作是文档树，由多个节点构成。所谓DOM，就是将HTML文档中各个元素按照从属关系建立起的模型。总的来说，我们可以利用DOM完成以下应用：
+
+5. 访问指定节点；
+6. 访问相关节点；
+7. 访问节点属性；
+8. 检查节点类型；
+9. 创建节点；
+10. 为节点添加事件；
+11. 操作节点。
+
+### HTML文档与DOM
+
+我们先看下面这个简单的HTML文档：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>一个简单的HTML文档</title>
+</head>
+<body>
+    <h1>这是一个简单的HTML文档</h1>
+    <p>文档中包含着段落和<a title="link" href="#">超级链接</a></p>
+</body>
+</html>
+```
+
+这个HTML文档的DOM可示例如下图：
+
+![文档对象模型](../images/dom.png)
+
+在上面的DOM中，html位于最顶端，是DOM的跟节点，head和body是html的子节点，它们属于同一层，并不互相包含，是兄弟关系，h1和p是兄弟元素，其父元素是body，p的子元素是a元素。
+
+### 节点
+
+节点（node）的概念来源于计算机网络，它代表网络中的一个连接点。在DOM中，文档也是由节点构成的集合。DOM定义了多种节点，常用的是元素节点、文本节点、和属性节点，分别对应元素、元素中包含的文字内容和元素的属性。
+
+例如上面的代码中：
+
+```html
+<a title="link" href="#">超级链接</a>
+```
+
+a元素的title和href属性就是a元素节点的属性节点，a元素所包含的内容“超级链接”就是文本节点。如下图所示：
+
+![DOM与节点](../images/node.png)
+
+### 使用DOM
+
+DOM提供了一种访问文档内容的机制，我们可以使用DOM处理HTML文档的内容。DOM由节点（node）构成，每一个节点，都有一系列的属性、方法可以使用，常用属性、方法见下表：
+
+| 属性/方法  |  类型/返回类型  |  说明  |
+|------------|-----------------|--------|
+|nodeName | String  | 节点名称 |
+|nodeValue | String  | 节点的值 |
+|nodeType | Number  | 节点类型 |
+|firstChild | Node    | childNodes列表的第一个节点 |
+|lastChild | Node    | childNodes列表的最后一个节点 |
+|childNodes | NodeList | 所有子节点列表，方法item(i)可以访问其中节点 |
+|parentNode | Node    | 父节点 |
+|previousSibling | Node    | 指向前一个兄弟节点 |
+|nextSibling | Node    | 指向后一个兄弟节点 |
+|hasChildNodes() | Boolean | 是否包含子节点 |
+|attributes | NameNodeMap | 包含一个元素特性的Attr对象 |
+|appendChild(node) | Node    | 将node节点添加到childNodes末尾 |
+|removeChild(node) | Node    | 从childNOdes中删除node节点 |
+|repaceChild(new,old) | Node    | 将childNodes中的oldnode节点替换为newnode节点 |
+|insertBefore(new,ref) | Node    | 在childNOdes中的refnode节点之前插入newnode节点 |
+|innerHTML | String  | 读取或者设置某个标记之间的所有内容 |
+|className | String  | 读取或者设置节点的CSS类别 |
+
+#### 访问节点
+
+DOM提供了一些很便捷的方法来访问文档的节点，最常用的是getElementsByTagName()和getElementById()，此外比较常用的是getElementsByName()、getElementsByClassName();
+
+```javascript
+……
+        var oLi = document.getElementsByTagName('li');
+        for(var i = 0 in oLi) {
+        console.log(i + '=' + oLi[i]);
+    }
+        console.log(oLi);
+        console.log(oLi.length);
+        console.log(oLi[0].childNodes[0].nodeValue);
+……
+```
+
+将访问oLi子节点列表中的第一个节点的值。
+
+#### 检测节点类型
+
+通过节点的nodeType属性可以检测出节点的类型，DOM定义了12种类型，大多数情况下，我们用到的是以下类型：
+
+1. ELEMENT_NODE 元素节点 nodeType的值为1；
+1. ATTRIBUTE_NODE 属性节点 nodeType的值为2；
+1. TEXT_NODE 文本节点 nodeType的值为3；
+
+#### 利用父子兄关系查找节点
+
+在获取了某个节点之后，可以通过父子关系，利用hasChildNodes()方法和childNodes属性获取该节点所包含的所有子节点。例如：
+
+```javascript
+……
+        var oLi = document.getElementById('myList');
+        var DOMString = "";
+        if(oLi.hasChildNodes()){
+            var oChild = oLi.childNodes;
+            for(var i=0; i<oChild.length;i++){
+                DOMString += oChild[i].nodeName + "\n";
+            }
+        }
+        console.log(DOMString);
+……
+```
+
+从运行结果我们可以看出，不光有元素节点，连它们之间的空格也被当成了子节点。
+
+通过parentNode属性，可以获取父元素节点。如：
+
+```javascript
+……
+        var myItem = document.getElementById('active');
+        console.log(myItem.parentNode.tagName);
+……
+```
+
+DOM还提供了处理兄弟之间关系的属性和方法，如nextSibling、previousSibling。
+
+#### 设置节点属性
+
+找到节点后，可以通过getAttribute()、setAttribute()方法取得或者设定节点的属性。
+
+```javascript
+……
+var myItem = document.getElementById('active');
+console.log(myItem.parentNode.tagName);
+console.log(myItem.getAttribute("title"));
+myItem.setAttribute("title","主要用以和用户交互");
+console.log(myItem.getAttribute("title"));
+……
+```
+
+#### 创建和添加节点
+
+创建元素节点采用creatElment(),创建文本节点采用creatTextNode(),创建文档碎片节点采用creatDocumentFragment()等等。
+
+在插入元素之前，先将元素内容添加到元素节点，再将元素节点及其包含的文本节点添加到指定节点。
+
+```javascript
+……
+var oP = document.createElement("p");
+var oText = document.createTextNode("这是一个使用DOM生成的段落");
+oP.appendChild(oText);
+document.body.appendChild(oP);
+……
+```
+
+#### 删除节点
+
+删除节点使用removeChild()方法，通常先找到要删除的节点，然后利用parentNode属性找到父节点，然后使用父节点的removeChild方法。
+
+```javascript
+……
+<body onload="removeLi()">
+    <ul id="myList">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li id="active" title="JavaScript是脚本编程语言">JavaScript</li>
+    </ul>
+    <script>
+    function removeLi() {
+        var oLi = document.getElementById('active');
+        oLi.parentNode.removeChild(oLi);
+    }
+    </script>
+</body>
+……
+```
+
+#### 替换节点
+
+DOM提供replaceChild()方法来替换节点，具体过程和删除节点类似，先找到想要替换的节点，再创建新节点，然后使用父节点替换方法。
+
+```javascript
+……
+<body onload="replaceLi()">
+    <ul id="myList">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li id="active">JavaScript</li>
+    </ul>
+    <script>
+    function replaceLi() {
+        var oOldLi = document.getElementById('active');
+        var oNewLi = document.createElement('li');
+        var oText = document.createTextNode('ECMAScript');
+        oNewLi.appendChild(oText);
+        oOldLi.parentNode.replaceChild(oNewLi,oOldLi);
+    }
+    </script>
+</body>
+……
+```
+
+#### innerHTML属性
+
+innerHTML属性虽然不是W3C DOM的组成部分，但它得到了目前主流浏览器的支持。该属性表示某个标记之间的所有内容，包括代码本身。
+
+``` javascript
+var oLi = document.getElementById('active');
+console.log(oLi.innerHTML);
+oLi.innerHTML = "<a href='http://www.baidu.com'>Baidu</a>";
+```
+
+#### className属性
+
+className属性是一个非常实用的属性，可以修改一个节点的CSS类别。
+
+```javascript
+var oLi = document.getElementById('active');
+console.log(oLi.className);
+oLi.className += ' jsdemo';
+console.log(oLi.className);
+```
+
+使用className属性如果要追加CSS样式，而不是覆盖CSS样式的话，使用“+=”连接运算符，另外注意不同的样式名称使用空格分割。
+
+## JSON
+
+JSON 是一种轻量级的数据交换语言，基于JavaScript语法，但又独立于JavaScript，JSON 数据格式与语言无关，由Douglas Crockford创造。
+
+JSON用于描述资料结构，有两种结构存在：
+
+1. 对象（object）：一个对象包含一系列非排序的名称／值对(pair)，一个对象以`{`开始，并以`}`结束。每个名称／值对之间使用`:`分区。
+1. 数组 (array)：一个数组是一个值(value)的集合，一个数组以`[`开始，并以`]`结束。数组成员之间使用`,`分区。
+
+具体的格式如下：
+
+名称和值之间使用`:`隔开，一般的形式是：
+
+```json
+{name:value}
+```
+
+一个名称是一个字符串。
+
+一个值(value)可以是一个字符串(string)，一个数值(number)，一个对象(object)，一个布尔值(bool)，一个有序列表(array)，或者一个null值。
+
+### 转义
+
+由于JSON语法中使用了花括号，单引号、双引号和冒号，所以要在内容中使用上述符号的话，就需要特殊处理，即进行转义，转义的方式是加反斜线`\`，例如：
+
+```json
+{
+    "content":"\{"
+}
+```
+
+### 方法
+
+#### JSON.parse()
+
+将字符串解析为JSON。
+
+#### JSON.stringify()
+
+返回指定值的JSON字符串。

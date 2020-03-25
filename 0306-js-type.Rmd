@@ -1,0 +1,517 @@
+# JavaScript 变量类型
+
+JavaScript 是一种弱类型或者说动态语言。这意味着你不用提前声明变量的类型，在程序运行过程中，类型会被自动确定。这也意味着你可以使用同一个变量保存不同类型的数据.
+
+最新的 ECMAScript 标准定义了 7 种数据类型:`Boolean`、`Null`、`Undefined`、`Number`、`String`、`Symbol`[^2] 和`Object`。
+
+## Boolean布尔型
+
+布尔型数据的取值只有两个：true和false。布尔型数据不能用引号括起来，否则就变成字符串了。
+
+``` javascript
+var a = false; //boolean类型
+var b = 'false'; //字符串类型
+```
+
+## Null空类型
+
+值 null 是一个 JavaScript 字面量，表示空值（null or an "empty" value），即没有对象被呈现（no object value is present）。
+
+## Undefined未定义类型
+
+一个未初始化的变量的值为undefined,使用严格相等运算符(===)来判断一个值是否是undefined:
+
+``` javascript
+var x;
+alert(typeof x);
+```
+
+## Number数值型
+
+在Javascript中，数值型数据不区分整数和小数，数值型和字符型数据的区别是数值型数据不用引号括起来。例如：
+
+``` javascript
+var num1 = 54;
+var num2 = 5.4;
+```
+
+Number类型内置了一些方法，其中toString() 方法返回指定 Number 对象的字符串表示形式。
+
+``` javascript
+var count = 10;
+
+print( count.toString() );   // 输出 "10"
+print( (17).toString() );    // 输出 "17"
+
+var x = 6;
+
+print( x.toString(2) );      // 输出 "110"
+print( (254).toString(16) ); // 输出 "fe"
+
+print( (-10).toString(2) ); // 输出 "-1010"
+print( (-0xff).toString() ); // 输出 "-11111111"
+```
+
+## String 字符串
+
+字符串由多个字符构成，字符可以是字母、数字、标点符号或空格。字符串必须放在单引号或者双引号中。例如：
+
+``` javascript
+var txt1 = "JavaScript";
+```
+
+## Symbol 符号类型
+
+符号类型在 ECMAScript 第 6 版中被引入 Javascript。 符号类型是唯一的并且是不可修改的。
+
+## Object 对象类型
+
+在Javascript里，对象是非常重要的一种数据类型，对象可以被看作是由一些彼此相关的属性和方法集合在一起构成的数据实体。JavaScript中内置了一些对象，如array（数组）、date（日期）等等。
+
+### 数组
+
+字符串、数值型和布尔型变量在任意时刻只能存储一个值。如果要用一个变量存储多个值，就需要使用数组。数组是由名称相同的多个值构成的一个集合，集合中的值是数组的元素（element）。例如可以将一个班级的所有成员姓名存储在数组中。
+
+在Javascript中，使用array关键字来定义数组，在定义中，可以声明数组的大小，也可以不声明数组中元素的个数。例如：
+
+``` javascript
+var country = new array(180);   //定义了数组的大小
+var mybooks = new array();      //没有定义数组的大小
+mybooks[0] = “HTML”;          //为数组mybooks的第一个元素赋值
+mybooks[1] = “JavaScript”;    //为数组mybooks的第二个元素赋值
+```
+
+数组中元素的索引默认从0开始，上例中的“mybooks[0]”表示数组中的第一个元素。
+
+除了使用array关键字定义数组外，还可以直接使用方括号定义数组，数组中的元素要用逗号隔开，最后一个元素后没有逗号。如：
+
+``` javascript
+var site = [”腾讯”,”新浪”,”搜狐”,”网易”];
+```
+
+## 查看变量类型
+
+在JavaScript中，typeof操作符能返回一个字符串,表示未经求值的操作数(unevaluated operand)的类型。
+
+``` javascript
+var a = 1;
+alert(typeof a);
+```
+
+## 变量类型的转换
+
+JavaScript 是一种弱类型或者说动态语言。开发者不用提前声明变量的类型，在程序运行过程中，类型会被自动确定，这也意味着我们可以使用同一个变量保存不同类型的数据：
+
+``` javascript
+var foo = 42;    // foo is a Number now
+var foo = "bar"; // foo is a String now
+var foo = true;  // foo is a Boolean now
+```
+
+除了让程序自动确定类型外，有时，我们也可以使用以下函数强制转换数据类型：
+
+1. **Number()** 强制内容转为数字；
+1. **Boolean()** 强制内容转为布尔值；
+1. **String()** 强制内容转为字符串；
+
+如：
+
+``` javascript
+var　t1　=　Boolean("");       //返回false,空字符串
+var　t2　=　Boolean("s");  //返回true，非空字符串
+```
+
+[^2]: symbol类型是ECMAScript6新增的数据类型，是一种唯一、不可变的变量。
+
+## JavaScript Object
+
+对象是一个包含相关数据和方法的集合（通常由一些变量和函数组成，我们称之为对象里面的属性和方法）。Javascript 中对象(object)的概念可以比照着现实生活中实实在在的物体来理解。
+
+在JavaScript中，一个对象可以是一个单独的拥有属性和类型的实体。我们拿它和一个杯子做下类比。一个杯子是一个对象(物体)，拥有属性。杯子有颜色，图案，重量，由什么材质构成等等。同样，javascript对象也有属性来定义它的特征。
+
+一个对象就是一系列属性的集合，一个属性包含一个名字和一个值。一个属性的值可以是函数，这种情况下属性也被称为方法。
+
+在 JavaScript 中，几乎所有的东西都是对象。所有的原生类型除了 null 与 undefined 之外都被当作对象。它们可以被赋予属性，并且它们都有对象的全部特征。
+
+### 对象的创建
+
+JavaScript 拥有一系列预定义的对象。另外，我们可以通过对象初始化器（Object Initializer）创建自己的对象。或者通过创建一个构造函数并使用该函数和 new 操作符初始化对象。
+
+通过对象初始化器创建对象的方法如下：
+
+```javascript
+var obj = { property_1:   value_1,   // property_# may be an identifier...
+            property_2:   value_2,   // or a number...
+            // ...,
+            "property n": value_n }; // or a string
+```
+
+这里 obj 是新对象实例的名称，每一个 `property_i` 是一个标识符（可以是一个名称、数字或字符串字面量），并且每个 `value_i` 是一个其值将被赋予 `property_i` 的表达式。属性的集合用`{}`标记，通过点符号来访问一个对象的属性。对象有时也被叫作关联数组, 因为每个属性都有一个用于访问它的字符串值。如：
+
+```javascript
+obj['property_1'] = value1;
+obj[0] = value1;
+```
+
+但显然，用方括号访问对象属性的方式不如使用点符号的方式简洁。
+
+通过`new`运算符创建对象的示例如下：
+
+```javascript
+var author = new Object();
+author.words = '绿叶恋爱时便成了花';
+console.log(author.words);
+```
+
+`new`运算符的作用是创建一个对象实例。单纯的使用`new`运算符创建对象实例的方式不够灵活，尤其是要创建对象的多个实例时，需要逐一完成对象属性的赋值工作。因此，常通过构造函数和`new`运算符的结合创造对象，这种对象创造方法能在创造对象的同时完成对象属性的赋值。
+
+构造函数，是一种特殊的方法。主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，与`new`运算符一起使用在创建对象的语句中。
+
+通过构造函数和`new`运算符创建对象的例子：
+
+```javascript
+function student(sName, sex, major) {
+        this.sName = sName;
+        this.sex   = sex;
+        this.major = major;
+    }
+var student1 = new student('小明', '男','新媒体');
+```
+
+其中的`this`关键字指代对象本身。
+
+## 更改、删除对象中的属性
+
+更新对象中的属性值与单独设置对象属性值的方法是一样的。
+
+```javascript
+var student1.major = '数字出版';
+```
+
+使用delete命令可以删除对象中的属性：
+
+```js
+delete student1.major
+```
+
+## 为对象增加方法
+
+在对象中定义方法，和为对象添加属性类似，只不过赋值为函数即可。
+
+```javascript
+function student(sName, sex, major) {
+        this.sName = sName;
+        this.sex   = sex;
+        this.major = major;
+    }
+var student1 = new student('小明', '男','新媒体');
+student1.sayHello = function('message') {
+    console.log(message);
+}
+student1.sayHello();
+```
+
+## 循环输出对象的属性
+
+在有些情况下，开发人员并不了解对象的内部属性，这时可以使用`for…in`语句枚举对象的所有属性。如下例所示：
+
+``` javascript
+for(var i in student1) {
+  console.log(i + "=" + student1[i]);
+}
+```
+
+## JavaScript 函数
+
+在 JavaScript中，函数是头等(first-class)对象，因为它们可以像任何其他对象一样具有属性和方法。它们与其他对象的区别在于函数可以被调用。简而言之，它们是Function对象。
+
+### function对象
+
+| 属性及方法名称 | 意义 |
+|----------|------|
+|Function.caller|获取调用函数的具体对象。|
+|Function.length|获取函数的接收参数个数。|
+|Function.name |获取函数的名称。|
+|Function.displayName |获取函数的display name。|
+|Function.prototype.constructor|声明函数的原型构造方法|
+|Function.prototype.apply()|在一个对象的上下文中应用另一个对象的方法；参数能够以数组形式传入。|
+|Function.prototype.bind()|bind()方法会创建一个新函数,称为绑定函数|
+|Function.prototype.call()|在一个对象的上下文中应用另一个对象的方法。|
+|Function.prototype.isGenerator() |若函数对象为generator，返回true，反之返回 false。|
+|Function.prototype.toSource() |获取函数的实现源码的字符串。|
+|Function.prototype.toString()|获取函数的实现源码的字符串。|
+
+### 函数的定义
+
+函数可以通过多种方式进行定义：
+
+#### 函数声明
+
+```js
+function name([param[, param[, ... param]]]) { statements }
+```
+
+#### 函数表达式
+
+```js
+let function_expression = function [name]([param1[, param2[, ..., paramN]]]) {
+   statements
+};
+```
+
+#### 函数生成器声明
+
+```js
+function* name([param[, param[, ... param]]]) { statements }
+```
+
+#### 函数生成器表达式
+
+```js
+let function_expression = function* [name]([param1[, param2[, ..., paramN]]]) {
+   statements
+};
+```
+
+#### 箭头函数表达式
+
+箭头函数是简写形式的函数表达式，箭头函数总是匿名的。
+
+```js
+(param1, param2, …, paramN) => { statements }
+(param1, param2, …, paramN) => expression
+         // 相当于  => { return expression; }
+
+// 如果只有一个参数，圆括号是可选的:
+(singleParam) => { statements }
+singleParam => { statements }
+
+// 无参数的函数需要使用圆括号:
+() => { statements }
+```
+
+箭头函数的设计目的，就是简写，如上面语法中的参数，如果只有一个，则可以去掉包含参数的圆括号；函数体中的表达式，如果只有一行，则可以去掉花括弧。
+
+箭头函数的引入有两个方面的影响：一是更简短的函数书写，二是对 this 的词法解析。
+
+##### 更简洁的函数书写
+
+```js
+var a = [
+  "hello",
+  "JavaScript",
+  "arrow",
+  "function"
+];
+
+var a2 = a.map(function(s){ return s.length });
+
+var a3 = a.map( s => s.length );
+```
+
+比较一下，显然使用箭头函数，使得匿名函数的定义更为简洁，少了function、圆括号、花括号和return关键字。
+
+##### 箭头函数不绑定this
+
+在箭头函数出现之前，每个新定义的函数都有其自己的this值，这个规定在有些情景下回带来不便。
+
+在 ECMAScript 3/5 中，这个问题可以通过新增一个变量来指向期望的 this 对象，然后将该变量放到闭包中来解决。
+
+```js
+function Person() {
+  var self = this; // 新增一个变量来指向期望的 this 对象
+  self.age = 0;
+
+  setInterval(function growUp() {
+    // 回调里面的 `self` 变量就指向了期望的那个对象了
+    self.age++;
+  }, 1000);   //然后将该变量放到闭包中来解决。
+}
+```
+
+而箭头函数则会捕获其所在上下文的  this 值，作为自己的 this 值，因此下面的代码将如期运行：
+
+```js
+function Person(){
+  this.age = 0;
+
+  setInterval(() => {
+    this.age++; // |this| 正确地指向了 person 对象
+  }, 1000);
+}
+
+var p = new Person();
+```
+
+使用箭头函数，一方面简化了代码书写，最关键是，箭头函数能判断出上下文的this值，而不是在匿名函数中自己创建this值。
+
+### 函数参数
+
+#### 实参与形参
+
+调用函数时，传递给函数的值被称为函数的实参（值传递），对应位置的函数参数名叫作形参。如果实参是一个包含原始值(数字，字符串，布尔值)的变量，则就算函数在内部改变了对应形参的值，返回后，该实参变量的值也不会改变。如果实参是一个对象引用，则对应形参会和该实参指向同一个对象。
+
+#### 参数默认值
+
+JavaScript 中函数的参数默认是undefined。然而，在某些情况下可能需要设置一个不同的默认值。
+
+```js
+function multiply(a, b = 1) {
+  return a * b;
+}
+
+multiply(5, 2); // 10
+multiply(5, 1); // 5
+multiply(5);    // 5
+```
+
+#### 不定数量参数
+
+```js
+function(a, b, ...theArgs) {
+  // ...
+}
+```
+
+theArgs将收集的参数和所有后续参数，从而实现不定量多个参数的接收。
+
+### 变量作用域
+
+在函数内部定义的变量，无法在函数外直接调用。而在函数外部定义的变量，可以在函数内部使用。
+
+```js
+var message = 'hello';
+var alertMessage = function() {
+    alert(message);
+    var message_1 = '您好';
+}
+alertMessage();
+alert(message_1);
+```
+
+上述代码会出现`ReferenceError: message_1 is not defined`的错误信息。
+
+## JavaScrip 数组
+
+数组是一种类列表对象，它的原型中提供了遍历和修改元素的相关操作。JavaScript 数组的长度和元素类型都是非固定的。因为数组的长度可随时改变，并且其数据在内存中也可以不连续，所以 JavaScript 数组不一定是密集型的，这取决于它的使用方式。一般来说，数组的这些特性会给使用带来方便。
+
+数组继承自`Function`和`Object`。
+
+### 创建数组
+
+创建数组的方式有以下几种：
+
+```js
+[element0, element1, ..., elementN]
+new Array(element0, element1[, ...[, elementN]])
+new Array(arrayLength)
+```
+
+例如：
+
+```js
+let a = [1, 2, 3, 4]
+let b = new Array(5, 6, 7, 8)
+let c = new Array(10)
+```
+
+JavaScript 中没有关联数组这一数据类型，要使用类似关联数组的数据类型，必须使用对象。
+
+### 访问数组元素
+
+JavaScript 只能用整数作为数组元素的索引，而不能用字符串(除整数形式的字符串）。例如：
+
+```js
+console.log(a['0'])
+console.log(a[0])
+```
+
+可以将数组的索引用引号引起来，比如 `a[2]` 可以写成 `a['2']`。 `a[2]` 中的 `2` 会被 JavaScript 解释器通过调用 `toString` 隐式转换成字符串。
+
+### 常用属性及方法
+
+#### 数组长度length
+
+length 是Array的实例属性，返回或设置一个数组中的元素个数。
+
+#### 判断是否是Array
+
+`Array.isArray()` 用于确定传递的值是否是一个 Array。
+
+#### 数据操作方法
+
+##### 添加元素到数组的末尾
+
+```js
+var newLength = fruits.push('Orange');
+```
+
+##### 删除数组指定元素内容
+
+```js
+delete fruits[2]; // 删除fruits数组中的第3个元素内容
+```
+
+delete删除数组中元素的内容后，元素大小不会改变，该元素的内容为undefined，位置依然保留。
+
+##### 删除数组末尾的元素
+
+```js
+var last = fruits.pop(); // remove Orange (from the end)
+```
+
+##### 删除数组最前面（头部）的元素
+
+```js
+var first = fruits.shift(); // remove Apple from the front
+// ["Banana"];
+```
+
+##### 添加元素到数组的头部
+
+```js
+var newLength = fruits.unshift('Strawberry') // add to the front
+// ["Strawberry", "Banana"];
+```
+
+##### 合并数组
+
+concat方法能将两个数组合并在一起。
+
+```js
+var fruits2 = ['苹果','香蕉'];
+var fruits = fruits1.concat(fruits2); //将数组fruits1和fruits2合并成新数组fruits
+```
+
+#### 迭代方法
+
+众多遍历方法中，有很多方法都需要指定一个回调函数作为参数。不要尝试在遍历过程中对原数组进行任何修改。
+
+##### forEach()
+
+为数组中的每个元素执行一次回调函数，不生成新数组，也没有返回值。
+
+```js
+var fruits = ['Apple', 'Banana'];
+
+fruits.forEach(function (item, index, array) {
+    console.log(item, index);
+});
+```
+
+##### map()
+
+map()方法，将使得数组中的每个元素都用map()方法提供的函数进行处理，最后返回由处理后的各元素构成的新数组。
+
+```js
+var numbers = [1, 4, 9];
+var doubles = numbers.map(function(num) {
+  return num * 2;
+});
+```
+
+### 扩展阅读资料
+
+1. <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object>
+1. <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function>
+1. <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array>
