@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>快捷清单</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-lg" id="app">
+                    <div class="card-header">
+                        <h2 class="card-title mb-3">快捷清单</h2>
+                        <div class="form-group mb-0">
+                            <input type="text" class="form-control underline" :placeholder="placeholder"
+                                v-model="newTodoTitle" @keyup.enter="addTodo" ref="focus"
+                                :disabled="this.todos.length >= 5" />
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <transition-group name="demo" tag="div" enter-active-class="animated fadeInDown">
+                                <div v-for="todo in filteredTodos" :key="todo.id">
+                                    <div class="list-group-item " v-if="!todo.editing">
+                                        <span :class="{completed: todo.completed}" @dblclick="editTodo(todo)"
+                                            @keyup.enter="editDone(todo)">{{ todo.title }}</span>
+                                        <span
+                                            class="d-none d-xl-block">{{ todo.created | formatter(todo.created) }}</span>
+                                        <span>{{ todo.created | fromNow(todo.created) }}</span>
+                                        <button type="submit" class="btn btn-primary" @click="markAsCompleted(todo)"
+                                            v-show="todo.completed==true">重置</button>
+                                        <button type="submit" class="btn btn-primary" @click="markAsCompleted(todo)"
+                                            v-show="todo.completed==false">完成</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            @click="removeTodo(todo)">删除</button>
+                                    </div>
+                                    <div class="list-group-item" v-if="todo.editing">
+                                        <input type="text" v-focus="true" class="form-control underline"
+                                            v-model="todo.title" @keyup.enter="editDone(todo)" @blur="editDone(todo)" />
+                                    </div>
+                                </div>
+                            </transition-group>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary" @click="getCompletedTodos">已完成任务 <span
+                                class="badge badge-light">{{finishedTodos}}</span></a>
+                        <a href="#" class="btn btn-primary" @click="getOngoingTodos">未完成任务 <span
+                                class="badge badge-danger">{{unfinishedTodos}}</span></a>
+                        <a href="#" class="btn btn-primary" @click="getAllTodos">所有任务 <span
+                                class="badge badge-light">{{totalTodos}}</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/locale/zh-cn.js"></script>
+    <script>
+        // let id = 0
+        const STORAGE_KEY = 'My-todo-APP'
+        const todoStorage = {
+            uid: 0,
+            fetch: function () {
+                // 从本地存储中获取信息
+                var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                // 整理数组id，避免下次启动时，发生id冲突的情况
+                todos.forEach(function (todo, index) {
+                    debugger
+                    todo.id = index
+                })
+                // 取得初始ID 值
+                todoStorage.uid = todos.length
+                return todos
+            },
+            save: function (todos) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+            }
+        }
+        var vm = new Vue({
+            el: "#app",
+            data: function () {
+                return {
+                    todos: todoStorage.fetch(),
+                    newTodoTitle: "",
+                    intention: "ongoing"
+                }
+            },
+            filters: {
+                fromNow: function (value) {
+                    return moment(value).fromNow()
+                },
+                formatter: function (value) {
+                    return moment(value).format("lll")
+                }
+            },
+            computed: {
+                placeholder: function () {
+                    if (this.todos.length >= 5) {
+                        return "请先完成已有任务。"
+                    } else {
+                        return "请输入待办事项，回车添加。"
+                    }
+                },
+                unfinishedTodos: function () {
+                    return this.todos.filter(todo => !todo.completed).length
+                },
+                totalTodos: function () {
+                    return this.todos.length
+                },
+                finishedTodos: function () {
+                    return this.todos.filter(todo => todo.completed).length
+                },
+                filteredTodos: function () {
+                    switch (this.intention) {
+                        case "ongoing":
+                            return this.todos.filter(todo => !todo.completed)
+                            break
+                        case "completed":
+                            return this.todos.filter(todo => todo.completed)
+                            break
+                        default:
+                            return this.todos
+                    }
+                }
+            },
+            directives: {
+                focus: {
+                    inserted: function (el) {
+                        el.focus()
+                    }
+                }
+            },
+            mounted() {
+                this.myFocus()
+            },
+            methods: {
+                myFocus: function () {
+                    this.$refs.focus.focus()
+                },
+                addTodo: function () {
+                    if (this.newTodoTitle != "") {
+                        this.todos.push({
+                            id: todoStorage.uid++,
+                            title: this.newTodoTitle,
+                            completed: false,
+                            created: moment().format(),
+                            editing: false
+                        })
+                        this.newTodoTitle = ""
+                    }
+                },
+                markAsCompleted: function (todo) {
+                    todo.completed = !todo.completed
+                },
+                removeTodo: function (todo) {
+                    this.todos.splice(this.todos.indexOf(todo), 1)
+                },
+                editTodo: function (todo) {
+                    // console.log(todo)
+                    // name = 'name-' + todo.id
+                    // // this.$refs[name][0].setAttribute('autofocus', true)
+                    // this.$refs[name][0].setAttribute('contenteditable', true)
+                    todo.editing = true
+
+                },
+                editDone: function (todo) {
+                    todo.editing = false
+                },
+                getCompletedTodos: function () {
+                    this.intention = "completed"
+                },
+                getOngoingTodos: function () {
+                    this.intention = "ongoing"
+                },
+                getAllTodos: function () {
+                    this.intention = "all"
+                }
+
+            },
+            watch: {
+                todos: {
+                    handler: function (todos) {
+                        todoStorage.save(todos)
+                    },
+                    deep: true
+                }
+            }
+        })
+    </script>
+
+    <style>
+        body {
+            background-image: url(./images/bg.jpg);
+        }
+
+        h1,
+        h2 {
+            font-weight: bold;
+        }
+
+        .card {
+            margin-top: 10vh;
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .card-header {
+            border: none;
+            background-color: transparent;
+        }
+
+        .underline {
+            /* border: none; */
+            border: none;
+            border-bottom: 2px solid #80bdff;
+            background-color: transparent;
+            border-radius: 0;
+            /* border: 2px solid; */
+        }
+
+        .underline:focus {
+            color: #495057;
+            background-color: transparent;
+            border-color: transparent;
+            border-bottom-color: #0877e6;
+            outline: 0;
+            box-shadow: none;
+        }
+
+        .list-group-item {
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .list-group-item:hover {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        }
+
+        .list-group-item span,
+        .list-group-item button {
+            margin-left: 1rem;
+            font-size: 14px;
+        }
+
+        .list-group-item span:first-child {
+            margin-left: 0;
+            flex-grow: 1;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+
+        .demo-move {
+            transition: all 1s ease-in-out;
+        }
+
+        .demo-leave-to {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .demo-leave-active {
+            position: absolute;
+        }
+
+    </style>
+</body>
+
+</html>

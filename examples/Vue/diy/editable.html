@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>性别</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in list" :key="item.id">
+                        <td>
+                            <span v-if="!item.editing" @dblclick="edit(item)">{{item.wenzi}}</span>
+                            <input type="text" v-if="item.editing" v-model="item.wenzi" @blur="save(item)">
+                        </td>
+                        <td>
+                            <span v-if="!item.editing" @dblclick="edit(item)">{{item.gender}}</span>
+                            <input type="text" v-if="item.editing" v-model="item.gender" @blur="save(item)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    list: [
+                        { id: 0, wenzi: '迪热力巴', gender: '女性', editing: false },
+                        { id: 2, wenzi: '鹿晗', gender: '男性', editing: false },
+                    ],
+                }
+            },
+            methods: {
+                edit: function (item) {
+                    item.editing = true
+                },
+                save: function (item) {
+                    item.editing = false
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

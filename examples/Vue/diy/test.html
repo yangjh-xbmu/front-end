@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Todo</title>
+
+</head>
+
+<body>
+    <div id="todo-app">
+        <div>
+            <input type="text" placeholder="添加 todo" v-model="newTodoTitle" @keyup.enter="addTodo" />
+        </div>
+        <!-- todo list -->
+        <ul>
+            <li v-for="todo in todos" v-bind:key="todo.id">
+                <span>{{ todo.title }}</span>
+            </li>
+        </ul>
+
+        <!-- end todo list -->
+
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        let id = 0;
+        var app = new Vue({
+            el: '#todo-app',
+            data: function () {
+                return {
+                    todos: [],
+                    newTodoTitle: '',
+
+                }
+            },
+            methods: {
+                addTodo: function () {
+                    app.todos.push({ id: id++, title: app.newTodoTitle });
+                    this.newTodoTitle = '';
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

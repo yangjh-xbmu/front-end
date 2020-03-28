@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue点击切换改变内容</title>
+
+</head>
+
+<body>
+    <div id="example">
+        <div style="text-align: center;">
+            <p v-text="btnText" v-show="flag==true"></p>
+            <p v-text="btnText" v-show="flag==false"></p>
+            <button @click="showToggle">切换</button>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#example",
+            data: {
+                flag: true,//单位切换开关
+                btnText: '元/吨',
+            },
+            methods: {
+                showToggle: function () {
+                    this.flag = !this.flag
+                    if (this.flag == true) {
+                        this.btnText = "元/吨"
+                    } else if (this.flag == false) {
+                        this.btnText = "元/方"
+                    }
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>
