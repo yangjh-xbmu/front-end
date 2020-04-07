@@ -78,7 +78,7 @@
                 var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
                 // 整理数组id，避免下次启动时，发生id冲突的情况
                 todos.forEach(function (todo, index) {
-                    debugger
+                    // debugger
                     todo.id = index
                 })
                 // 取得初始ID 值

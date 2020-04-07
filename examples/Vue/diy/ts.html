@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>异步获取数据</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <style>
+        h5 {
+            line-height: 1.5;
+        }
+
+        a,
+        a:hover {
+            color: #000;
+        }
+
+        h5 span {
+            color: white;
+            padding-left: 0.5em;
+            padding-right: 0.5em;
+            margin-right: 0.2em;
+            padding: 0 0.5rem;
+            display: inline-block;
+        }
+
+        .fake {
+            background-color: #C41F20;
+        }
+
+        .doubt {
+            background-color: #484848;
+        }
+
+        .true {
+            background-color: #42A163;
+
+        }
+
+        p small {
+            margin-right: 1em;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container bg-light " id="watch-rumor">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center my-5 font-weight-bold">异步获取谣言数据</h1>
+                <div class="alert alert-primary" role="alert">
+                    <span>状态码：{{ code }}</span><span>信息：{{ message }}</span>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col mb-4" v-for="rumor in rumors" :key="rumor.id">
+                        <div class="card">
+
+                            <img :src="rumor.imgsrc" class="card-img-top" alt="rumor.title">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">
+                                    <span :class="rumor.markstyle">{{rumor.explain}}</span> <a
+                                        :href="rumor.href">{{rumor.title}}</a></h5>
+                                <p class="card-text">{{rumor.desc}}</p>
+                                <p class="card-text"><small>查证者：{{rumor.author}}</small><small
+                                        class="text-muted">{{rumor.date}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#watch-rumor',
+            data: {
+                rumors: [],
+                code: "",
+                message: ""
+            },
+            created: function () {
+                this.getRumorsList()
+            },
+            methods: {
+                getRumorsList: function () {
+                    var that = this
+                    axios.get('http://api.tianapi.com/txapi/rumour/index', {
+                        params: {
+                            key: "02740fcb753b35eff80e7fa788b5818d"
+                        },
+                        headers: {
+                            "Content-Type": 'application/x-www-form-urlencoded'
+                        }
+                    }).then(function (response) {
+                        that.code = response.data.code
+                        that.message = response.data.msg
+                        that.rumors = response.data.newslist
+                        that.rumors.forEach(function (rumor, index) {
+                            // debugger
+                            rumor.href = "https://vp.fact.qq.com/article?id=" + rumor.id
+                        })
+                        console.log(that.rumors);
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
