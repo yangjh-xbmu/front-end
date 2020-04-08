@@ -1,0 +1,754 @@
+# (PART) Jquery {-}
+
+# jQuery 简介
+
+> 创造优美事物的方式往往不是从头做起，而是在现有成果的基础上做一些小小的调整，或者将已有的观点用比较新的方式组合起来。
+> 保罗·格雷厄姆，《黑客与画家》
+
+即便掌握了 JavaScript 脚本的基本知识，开发者在使用 JavaScript 时，仍面临一个重大挑战，那就是不同浏览器对 Web 标准的支持不尽一致，往往大部分时间和精力花在解决浏览器兼容性的问题上。另外，常见的 JavaScript 应用如果在每次内容制作中都要重写的话，工作效率将是非常低下的。为此，很多开发者提供了“库”来解决上述问题。常见的 JavaScript 库有 jQuery、Prototype、Mootools 等等，经过若干年的发展和竞争，jQuery 脱颖而出，成为使用最为广泛的 JavaScript 库。可以毫不夸张地说，jQuery 的出现改变了开发者使用 JavaScript 的习惯。
+
+jQuery 是一个开源免费的优秀 JavaScript 库，它能使用户更加方便地处理 HTML 文档、事件等等。jQuery 由 [约翰·雷西格（John Resig）](http://en.wikipedia.org/wiki/John_Resig) 于 2006 年创建，从最初的增强 CSS 选择器功能，发展至今，功能日益丰富：
+
+* jQuery 大大简化了选取 DOM 局部内容的步骤，可以灵活高效地选择页面内容。
+* 引入 jQuery 后，开发人员不再需要考虑复杂的浏览器兼容问题，可以更加轻松地处理事件，提高脚本的稳定性。
+* jQuery 内置了可自定义参数的动画效果，简化了应用动画效果的过程。
+* jQuery 还提供了很多附加的功能简化了常用的 JavaScript 操作。
+* jQuery 使用最新的 CSS3 标准，即便不支持 CSS3 的浏览器，也能通过脚本达到 CSS3 的效果，极大地丰富网页的表现形式。
+* jQuery 提供了一整套 Ajax 相关操作的方法，大大方便了异步交互的开发和使用。
+
+此外，jQuery 是一个开源软件，围绕着 jQuery 已经建立了良好的“生态系统”，用户众多，文档齐全，学习成本较低。同时还有许多成熟的插件可供选择。
+
+学习 jQuery，最好的资源还是 [官方文档](http://api.jquery.com/)。此外，还有 [非官方的中文社区](http://www.jquery123.com/)。
+
+在 jQuery 官方网站下载最新版的 jQuery，将其放置在合适的目录中，然后在 HTML 文档中使用 script 元素引用 jQuery 库，即可使用 jQuery 提供的强大方便的功能。
+
+```html
+<script src="js/jquery-3.2.1.min.js"></script>
+```
+
+## jQuery 基础概念
+
+下面，我们将介绍几个 jQuery 中的重要概念，这些概念将有助于理解 jQuery 的设计理念。
+
+### jQuery 中的“$”
+
+在 jQuery 中，最频繁使用的莫过于美元符号“$”，在 jQuery 中，美元符号“$”等同于“jQuery”，表示 jQuery 对象。
+jQuery 对象就是通过 jQuery 包装 DOM 对象之后产生的对象。为了方便代码的编写，通常采用“\$”代替“jQuery”。“\$”提供了丰富的功能，包括选择页面中的元素、作为功能函数的前缀、window.onload 的改进、创建 DOM 等等。一定要注意，在 jQuery 对象中无法直接使用原生 JavaScript 中 DOM 对象的方法和属性，但可使用 get(index) 方法将 jQuery 对象转化为 DOM 对象。
+
+### `$( document ).ready()`
+
+浏览器载入 HTML 文档并不是一次性全部载入的，而是从上到下依次载入。但我们的脚本可能就在文档的顶端或者中间，当脚本已经载入，但 HTML 文档还没有完全载入完毕时，脚本去处理还没有载入的 DOM 时会产生无效或者错误结果。为了解决这一问题，人们想出了一些方案：
+
+* 将脚本放在页面最下面。 这种方案在大多数时候是有效的，但是有的时候，创作者并没有能将脚本放在页面底部的权限或者可能性。例如，在大多数 CMS 中，普通编辑人员只能就文档的局部内容进行修改，整体文档的生成则是不同部门的合作结果。想象一下淘宝、天猫的首页、门户网站的首页等等皆是如此。
+* 使用`window.onload`事件。`window.onload`会在页面所有元素都载入后触发，当页面中有大量图片或者视频时，触发的时机有些过晚。还有，`window.onload`只能使用一次，当页面中的多个脚本调用`window.onload`时会产生冲突。
+
+jQuery 中的`ready()`方法很好地解决了上述问题，它能够自动将其中的函数在页面加载（实际上是 DOM 准备完毕后）完成后运行。并且同一个页面可以使用多个`ready()`方法，而且互不冲突。`$( document ).ready()`可简写为下面的代码，将演示`$( document ).ready()`和`window.onload`的区别：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery 中的 ready 方法</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    p {
+        font-size: 20;
+        padding: 5px 0;
+    }
+    </style>
+    <script>
+    $(document).ready(
+        function() {
+            console.log("document.ready() 第一次触发");
+        });
+    // jQuery 中的 ready 方法可以多次调用，互不冲突
+    $(document).ready(
+        function() {
+            console.log("document.ready() 第二次触发");
+        });
+    // $( document ).ready() 可简写为$()。
+    $(function() {
+        console.log("document.ready() 第一次触发");
+    });
+
+    window.onload = function() {
+        console.log("window onload 事件第一次触发");
+    };
+
+    // window.onload 事件多次调用会产生冲突，只执行最后一次的 onload
+    window.onload = function() {
+        console.log("window onload 事件第二次触发");
+    };
+    </script>
+</head>
+
+<body>
+    <h1>jQuery 中的 ready 方法</h1>
+    <iframe src="http://cn.bing.com"></iframe>
+    <p>请打开控制台查看输出效果</p>
+    <!-- <script src="js/jquery-1.11.3.min.js"></script> -->
+    <!-- jQuery 库引用位置如果放在这里，则之前的 jQuery 代码出错 -->
+</body>
+
+</html>
+```
+
+上面的页面运行后，我们在浏览器控制台中可以看到`$( document ).ready()`方法运行的三个结果，而`window.onload`事件虽然脚本中设置了两次，但输出的结果只有一个，而使用 jQuery 的 ready 方法则可多次使用。
+
+### jQuery 选择符
+
+在 CSS 中，选择符的作用是选择页面中的某些元素，例如，在 CSS 中，我们可以使用 id 选择符选择特定的元素，然后为其添加样式：
+
+```css
+#demo {
+    color:red;
+}
+```
+
+虽然 CSS3 提供非常丰富的选择器，但是由于某些选择器被各个浏览器支持的情况不一样，所以很多选择器在实际 CSS 开发中很少用到。而在 jQuery 中，“$”也能使用 CSS 中的选择符，达到选择特定元素的目的。而且，jQuery 中的选择符已经为用户处理了繁琐复杂的浏览器兼容性问题。
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery 中 CSS 选择符的用法</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .even {
+        background-color: #ccc;
+    }
+    </style>
+    <script>
+    jQuery(document).ready(function() {
+        // jQuery 能使用 CSS 选择符选择特定的元素
+        $("#demo").addClass('red');
+        // :contains() 选择符
+        $("p:contains('.contains')").addClass('red');
+        // :eq() 选择符
+        $('p:eq(1)').addClass('center');
+        $('li:gt(0)').css('backgroundColor', 'yellow');
+        $('li:lt(1)').css('backgroundColor', 'yellow');
+        $('div:has("p")').addClass('red');
+        $(":header").css('backgroundColor', 'yellow');
+        $("tr:even").addClass('even');
+    });
+    </script>
+</head>
+
+<body>
+    <h1 id="demo" class="center">jQuery 使用 CSS 选择符选择特定节点</h1>
+    <p>jQuery 使用 CSS 中的选择符，比如 ID 选择符，选择特定节点。</p>
+    <p>jQuery 还可以使用。contains() 选择含有特定内容的元素。</p>
+    <ul>
+        <li>:eq()</li>
+        <li>:gt()</li>
+        <li>:lt()</li>
+    </ul>
+    <div>
+        <p>jQuery 中新增了：has() 选择符</p>
+    </div>
+    <h2>jQuery 可通过：header 选择所有的标题元素</h2>
+    <table>
+        <tr>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+        </tr>
+        <tr>
+            <td>单元格</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+```
+
+上例的运行结果显示：
+
+* CSS 选择符确实可以在 jQuery 中使用。事实上 jQuery 通过预先的编程，提供了几乎所有 CSS3 标准下的选择器。
+* jQuery 还提供了 CSS 机制中没有的选择符。
+
+## jQuery的扩展选择符
+
+jQuery作为JavaScript库，是用来处理网页中的内容，实现特定效果的。要改变网页的内容，首先得选择网页的内容，原生JavaScript对DOM进行操作前，也得通过类似于`getElementsByTagName()`的方法得到DOM的某个部分。而jQuery在CSS选择符基础上，又额外增加了一些选择符，使得jQuery的选择符功能非常强大。下面就介绍CSS选择符之外，jQuery增加的选择符有：
+
+* `:animated` 选择所有正在执行动画效果的元素。
+* `[name!="value"]` 选择不存在指定属性，或者指定的属性值不等于给定值的元素。
+* `:button` 选择所有按钮元素和类型为按钮的元素。
+* `:checkbox` 选择所有类型为复选框的元素。
+* `:contains()` 选择包含特定文本内容的所有元素。
+* `:eq()` 选择节点列表中的第n个元素（起始数字为0），如果n为负值，表示从后往前。`:eq()`选择符相当于CSS选择符中的`:nth-child()`、`:nth-last-child()`。
+* `:even` 选择所引值为偶数的元素，从 0 开始计数。
+* `:file` 选择所有类型为文件（file）的元素。
+* `:first` 选择第一个匹配的元素。
+* `:gt()` 选择节点列表中的第n个元素以上的所有元素，如果n为负值，表示从后往前。
+* `:has()` 选择至少含有一个指定元素的所有父元素。
+* `:header` 选择所有的标题元素，比如h1、h2等等。
+* `:hidden` 选择所有隐藏的元素。
+* `:input`选择所有 `input`, `textarea`, `select` 和 `button` 元素.
+* `:last` 选择最后一个匹配的元素。
+* `:lt()` 选择节点列表中的第n个元素以上的所有元素，如果n为负值，表示从后往前。
+* `:odd` 选择索引值为奇数元素，从 0 开始计数。
+* `:parent` 选择所有含有子元素或者文本的父级元素。
+* `:password` 选择所有类型为密码的元素。
+* `:radio` 选择所有类型为单选框的元素。
+* `:reset` 选择所有类型为重置的元素。
+* `:selected` 获取 `select` 元素中所有被选中的元素。
+* `:submit` 选择所有类型为提交的元素。
+* `:text` 选择所有类型为文本的元素。
+* `:visible` 选择所有可见的元素。
+
+除了CSS选择符及jQuery扩展的选择符之外，jQuery还提供了一个功能强大的`filter()`方法，该方法的参数既可以是选择符，还可以是一个函数。作为`filter()`参数的函数，其返回值必须是布尔值，`filter()`方法会逐一在选择结果中执行函数，最终对结果集进行过滤。
+
+下面的案例，用以演示`filter()`的用法：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery中filter方法</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    .info {
+        background-color: yellow;
+    }
+    </style>
+    <script>
+    jQuery(document).ready(function() {
+        // 选择指定列
+        $('td:nth-child(5n+3)')
+            // 将函数作为参数传给filter方法
+            .filter(function() {
+                console.log($(this).text());
+                if ($(this).text() < 21) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }).addClass('info');
+    });
+    </script>
+</head>
+
+<body>
+    <h1>jQuery中的filter方法</h1>
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>专业</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>小明</td>
+            <td>21</td>
+            <td>男</td>
+            <td>新闻</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>小冷</td>
+            <td>20</td>
+            <td>女</td>
+            <td>广告</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>小宝</td>
+            <td>22</td>
+            <td>女</td>
+            <td>数学</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>老盖</td>
+            <td>24</td>
+            <td>男</td>
+            <td>软件工程</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+```
+
+在这个例子中，我们将一个函数作为参数，传递给`filter()`方法，最终实现了将年龄小于21岁的单元格标记出来的功能。
+
+## jQuery事件处理
+
+JavaScript内置了很多处理用户交互行为的其他事件的方法，jQuery增强和扩展了其事件处理的机制，并使用更加优美的语法来处理事件。
+
+### 处理简单事件
+
+jQuery提供的`on()`方法，能够将事件处理函数绑定到选中元素的一个或多个事件上。要移除绑定的事件，使用`.off()`方法。
+
+`on()`方法的参数如下：
+
+* `events` 事件名称，必需参数。（多个事件名称用空格隔开）
+* `selector` 选择符，可选参数，作用是将事件绑定到选择结果中的后代选择符中。
+* `data` 数据，可选参数，当事件触发后，将数据传递以`event.data`的形式传递到事件处理函数。
+* `handler` 处理函数，必需参数，当事件触发时执行的函数。
+
+`on()`方法相当于DOM中的`addEventListener()`，但要比后者功能丰富。
+
+另外，大多数事件类型可以直接利用事件名称作为绑定函数，接受参数为监听函数，例如：
+
+```js
+$(#demo).click(function(){
+    //事件处理
+    });
+```
+
+下面是jQuery中绑定事件的案例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery中的事件绑定</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    div {
+        height: 300px;
+        border: 1px red solid;
+        border-radius: 5px;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("#demo").on('click', function() {
+            $(this).css('backgroundColor', randomColor());
+        });
+
+        function randomColor() {
+            return '#' + Math.random().toString(16).slice(2, 8);
+        };
+    });
+    </script>
+</head>
+
+<body>
+    <h1>jQuery中的事件绑定</h1>
+    <p>点击方框区域，随机更换背景颜色</p>
+    <div id="demo"></div>
+</body>
+
+</html>
+```
+
+### 事件对象
+
+在jQuery中，事件对象是通过唯一的参数传递给事件监听函数的。
+
+```js
+function(e){
+    e.preventDefault()
+}
+```
+
+对于事件对象，jQuery最重要的工作就是替开发者解决了浏览器兼容性问题。常用的属性和方法有：
+
+* `target` 引起事件的元素、对象。
+* `type` 事件的名称。
+* `preventDefault()` 阻止事件的默认行为。
+
+### jQuery 与 CSS
+
+jQuery提供了一系列处理CSS样式的方法，在之前的章节中，我们已经使用过`css()`和`addClass()`方法，下面我们介绍jQuery中和CSS有关的常用方法。
+
+#### `addClass()`
+
+`addClass()`为所有选中的元素添加指定的class名称。如：
+
+```js
+ $( "p:last" ).addClass( "selected highlight" );
+```
+
+#### `css()`
+
+`css()` 获取选中的元素的指定样式值，或者设置样式。
+
+```js
+var color = $( this ).css( "background-color" );
+    $( this ).css( "color", "red" );
+```
+
+用`css()`方法设置多个样式值时，将多个属性及其值使用对象字面量`{}`包含起来，属性和值之间用冒号“:”，多个属性及其值之间用逗号","隔开。
+
+```js
+$( this ).css({
+   "background-color": "yellow",
+   "font-weight": "bolder"
+});
+```
+
+#### `hasClass()`
+
+`hasClass()`在所有选中的元素中进行判断，看是否存在包含有指定内容的class的元素。例如：
+
+```js
+$( "#mydiv" ).hasClass( "bar" )
+```
+
+#### `toggleclass()`
+
+`toggleclass()`为 所有匹配的元素添加或者移除一个或者多个class类，增加、移除操作取决于当前class的值。例如：
+
+```js
+$( this ).toggleClass( "highlight" );
+```
+
+下面的案例将演示jQuery如何操作CSS：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>toggleClass方法练习</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    .highlight {
+        background: yellow;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("p").on("click", function () {
+           $(this).toggleClass('highlight');
+        })
+    });
+    </script>
+</head>
+
+<body>
+    <h1>toggleClass方法练习</h1>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+    <p>点击更换背景颜色</p>
+</body>
+
+</html>
+```
+
+### jQuery特效
+
+jQuery提供了一些为页面添加动画特效的方法，从常用的淡入淡出到复杂的动画，jQuery都可应对。
+
+#### 显示隐藏
+
+`hide()`和`show()`方法能隐藏、显示选中的元素，相当与在这些元素的起始标签中加入了`display`样式。例如：
+
+```js
+$("p:first").show();
+```
+
+没有参数的`show()`、`hide()`方法，会立即显示、隐藏选中的元素。`hide()`、`show()`方法的常用参数如下：
+
+* `duration` 一个字符串或者数字决定动画将运行多久。字符串有"slow"、"fast"，持续时间是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 “fast”' 和 “slow” 分别代表200和600毫秒的延时。
+* `easing` 用于确定使用的缓动函数。一个缓动函数指定用于动画进行中在不同点位的速度。 在jQuery库中easing默认的是调用 swing, 如果想要在一个恒定的速度进行动画，那么调用 linear。
+* `complete` 在动画完成时执行的函数，可选参数。
+
+`toggle()`方法能自动识别状态，实现显示、隐藏效果的切换，其使用方法和`show()`、`hide()`方法类似。
+
+下面是上述方法的案例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery显示隐藏特效</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style type="text/css" media="screen">
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    button {
+        margin: 5px 20px 5px 0;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("button:contains('显示')").click(function () {
+            $("p:first").show();
+        });
+        $("button:contains('隐藏')").click(function () {
+            $("p:first").hide();
+        });
+        $("button:contains('toggle')").click(function () {
+            $("p:first").toggle();
+        });
+        $("button:contains('duration')").click(function () {
+            $("p:first").toggle('fast');
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <h1>jQuery显示隐藏特效</h1>
+    <button>显示</button><button>隐藏</button><button>toggle</button><button>duration</button>
+    <p>不管你学习任何一项技能，选择任何一种专业，从事任何一个工作，如果你在刚接触的时候可以比较顺利达到入门，体验到些许成就感，那么你就会对它感兴趣，甚至越来越有兴趣，也会越学越好。反之，初学体验不佳将直接导致兴趣丧失。</p>
+    <p>即使存在某种技能上的天赋，如果初学体验不佳，也会造成兴趣丧失，进而技能天赋丧失。</p>
+</body>
+
+</html>
+```
+
+#### 淡入淡出
+
+`fadeIn()`和`fadeOut()`、以及`fadeTo()`方法通过改变匹配元素的不透明度做动画效果，`fadeTo()`方法不会隐藏的元素并可以指定最后的透明度值。`fadeToggle()`方法能在淡入、淡出效果之间切换。
+
+这几个方法的常用参数和`show()`方法类似：
+
+* `duration` 一个字符串或者数字决定动画将运行多久。字符串有"slow"、"fast"，持续时间是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 “fast”' 和 “slow” 分别代表200和600毫秒的延时。
+* `easing` 用于确定使用的缓动函数。一个缓动函数指定用于动画进行中在不同点位的速度。 在jQuery库中easing默认的是调用 swing, 如果想要在一个恒定的速度进行动画，那么调用 linear。
+* `complete` 在动画完成时执行的函数，可选参数。
+
+例如下面的代码将使div在3000毫秒时长内淡入，并在动画结束后，使span元素在100毫秒淡入：
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery淡入淡出特效</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    p {
+        position: relative;
+        width: 400px;
+        height: 90px;
+    }
+
+    div {
+        position: absolute;
+        width: 400px;
+        height: 65px;
+        font-size: 36px;
+        text-align: center;
+        color: yellow;
+        background: red;
+        padding-top: 25px;
+        left: 0;
+        display: none;
+    }
+
+    span {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery淡入淡出特效</h1>
+    <p>
+        too young, too simple，sometimes naive。 (<a href="#">click!</a>)
+        <div><span>CENSORED!</span></div>
+    </p>
+    <script>
+    $(function() {
+        var t = $('p').position().top + 'px';
+        var l = $('p').position().left + 'px';
+        $('div').css({
+            'top': t,
+            'left': l
+        });
+    });
+    $("a").click(function() {
+        $("div").fadeIn(3000, function() {
+            $("span").fadeIn(100);
+        });
+        return false;
+    });
+    </script>
+</body>
+
+</html>
+```
+
+#### 上下滑动效果
+
+`slideUp()`、`slideDown()`和`slideToggle()`方法用来实现上下滑动效果，其用法和淡入淡出、显示隐藏的方法类似。
+
+#### 自定义动画效果
+
+`.animate()`方法能根据一组css属性，执行自定义动画效果。这个方法的参数如下：
+
+* `properties` 一个CSS属性和值的对象,动画将根据这组对象移动。所有用于动画的属性必须是数字的，除非另有说明；这些属性如果不是数字的将不能使用基本的jQuery功能。。
+* `duration` 一个字符串或者数字决定动画将运行多久。字符串有"slow"、"fast"，持续时间是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 “fast”' 和 “slow” 分别代表200和600毫秒的延时。
+* `easing` 用于确定使用的缓动函数。一个缓动函数指定用于动画进行中在不同点位的速度。 在jQuery库中easing默认的是调用 swing, 如果想要在一个恒定的速度进行动画，那么调用 linear。
+* `complete` 在动画完成时执行的函数，可选参数。
+
+例如：
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery自定义动画</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    p {
+        width: 400px;
+        height: 90px;
+    }
+
+    div {
+        border: 1px red solid;
+        border-radius: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery自定义动画</h1>
+    <div>
+        <p>
+            jQuery自定义动画更加灵活，可以同时对多个属性设置动画效果
+        </p>
+    </div>
+    <script>
+    $('p').click(function() {
+        var paraWidth = $('p').outerWidth();
+        var $switcher = $(this).parent();
+        var switcherWidth = $switcher.outerWidth();
+        $switcher
+            .css({
+                position: 'relative'
+            })
+            .animate({
+                width: '50%'
+            }, 'slow')
+            .animate({
+                left: switcherWidth - paraWidth
+            }, 'slow')
+            .animate({
+                height: '+=20px'
+            }, 'slow')
+            .animate({
+                borderWidth: '5px'
+            }, 'slow');
+    });
+    </script>
+</body>
+
+</html>
+```

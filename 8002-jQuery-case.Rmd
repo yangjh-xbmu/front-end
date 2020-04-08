@@ -1,0 +1,253 @@
+# jQuery应用案例
+
+下面，我们通过一些案例来掌握jQuery中的事件、方法等等知识点的综合应用。
+
+## 返回顶部
+
+当用户浏览比较长的页面时，通过滑轮或者滚动条需要点击多次才能返回到页面顶端，因此，就有必要简化这一操作，通过返回顶部按钮就是常见的解决方案。
+
+### 原理
+
+`scroll()`事件触发后，判断位置，根据位置显示或隐藏按钮，点击后通过设置`scrollTop()`方法达到返回顶部的效果。
+
+### 代码
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用jQuery实现返回到顶部</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+
+    #toTop {
+        display: none;
+        position: fixed;
+        bottom: 5px;
+        right: 5px;
+        width: 64px;
+        height: 64px;
+        background-image: url('images/up.png');
+        background-repeat: no-repeat;
+        opacity: 0.4;
+    }
+
+    #toTop:hover {
+        opacity: 0.8;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>使用jQuery实现返回到顶部</h1>
+    <a href="#top" id="toTop"></a>
+    <p>
+        原理：scroll()事件触发后，判断位置，根据位置显示或隐藏按钮，点击后返回顶部。
+    </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore perferendis asperiores ex voluptas praesentium libero odit excepturi distinctio nostrum sequi harum atque autem enim suscipit, provident quibusdam sunt ullam.</p>
+
+    <script>
+    $(function() {
+        var b = $('#toTop');
+        $(window).scroll(function() {
+            100 < $(this).scrollTop() ? b.fadeIn() : b.fadeOut()
+        });
+        b.click(function(e) {
+                e.preventDefault();
+                $("body, html").animate({
+                    scrollTop: 0
+                }, 1000);
+            })
+    });
+    </script>
+</body>
+
+</html>
+```
+
+### 分析
+
+如何知道滚动条的变化呢？通过`window`对象的`scroll`方法。淡入淡出通过`fadein`和`fadeout`实现。而点击返回到页首的效果，则通过jQuery的`animate`方法实现。另外有一个小细节，当图片被点击后，使用事件对象的 `preventDefault()` 方法阻止了超级链接的默认行为。
+
+## 图片轮播
+
+图片轮播在各类应用中使用广泛，可在有限空间里展现多张图片，通常用在页面顶端，通过精心选择的图片，吸引用户注意力，起到推荐内容的作用。
+
+### 原理
+
+使用`setIntervel()`方法每隔一段时间，改变图片的`z-index`属性，从而实现图片的轮播。
+
+### 代码
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用jQuery实现图片切换</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+    
+    h1 {
+        color: green;
+    }
+    
+    #slide {
+        height: 300px;
+        width: 960px;
+    }
+    
+    #slide div {
+        position: absolute;
+        z-index: 0;
+    }
+    
+    #slide div.previous {
+        z-index: 1;
+    }
+    
+    #slide div.current {
+        z-index: 2;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>使用jQuery实现图片切换</h1>
+    <p>
+        原理：使用setIntervel()方法每隔一段时间，改变图片的z-index属性，从而实现图片的轮播。
+    </p>
+    <div id="slide">
+        <div class="current"><img src="images/Paris.jpg"></div>
+        <div><img src="images/Paris-2.jpg"></div>
+        <div><img src="images/Hong-Kong.jpg"></div>
+        <div><img src="images/Hong-Kong-2.jpg"></div>
+        <div><img src="images/London.jpg"></div>
+        <div><img src="images/London-2.jpg"></div>
+        <div><img src="images/San-Francisco.jpg"></div>
+        <div><img src="images/San-Francisco-2.jpg"></div>
+    </div>
+    <script>
+    $(function() {
+        // 每隔3000ms执行切换函数
+        setInterval(rotateImages, 3000);
+    });
+
+    function rotateImages() {
+        var oCurPhoto = $('#slide div.current');
+        var oNextPhoto = oCurPhoto.next();
+        if (oNextPhoto.length == 0) {
+            oNextPhoto = $('#slide div:first');
+        }
+
+        oCurPhoto.removeClass('current').addClass('previous');
+        oNextPhoto.css({
+                opacity: 0.0
+            }).addClass('current')
+            .animate({
+                    opacity: 1.0
+                }, 1000,
+                function() {
+                    oCurPhoto.removeClass('previous');
+                });
+    };
+    </script>
+</body>
+
+</html>
+```
+
+### 分析
+
+通过`setIntervel()`方法，设置图片切换间隔，通过`animate()`方法设置切换动画效果，还利用`animate()`的回调函数，实现了图片元素标签的切换。
+
+
+## 全选按钮
+
+在开发中，我们经常需要为用户设置一键全选、或者一键清除选择的功能，以提高用户体验。
+
+### 原理
+
+使用`each()`方法为众多同类型元素添加方法，使用`prop()`方法获取并设置属性。
+
+### 代码
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用jQuery实现全选、反选</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    body {
+        width: 960px;
+        margin: 0 auto;
+        font: 18px/1.8em '微软雅黑';
+    }
+
+    h1 {
+        color: green;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>使用jQuery实现全部选择与反选</h1>
+    <p>
+        原理：使用each()方法为众多同类型元素添加方法，使用prop()方法获取并设置属性。
+    </p>
+    <p>
+        <input type="checkbox" name="gid[]" value="1" />1
+        <input type="checkbox" name="gid[]" value="2" />2
+        <input type="checkbox" name="gid[]" value="3" />3
+        <input type="checkbox" name="gid[]" value="4" />4
+        <input type="checkbox" name="gid[]" value="5" />5
+    </p>
+    <input type="checkbox" name="chk_all" id="chk_all" />全选/取消全选
+    <script>
+    $(function() {
+        // 为按钮添加单击事件处理函数
+        $('#chk_all').click(function() {
+            // 为每个input添加函数
+            $('p input').each(function() {
+                // 将按钮的值传递给checkbox
+                $(this).prop('checked', $('#chk_all').prop("checked"));
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>
+```
+
+### 分析
+
+通过`each()`方法为每个`input`元素添加方法，再使用`prop()`方法设置属性值。
