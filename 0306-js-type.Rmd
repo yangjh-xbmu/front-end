@@ -117,6 +117,11 @@ var txt1 = "JavaScript";
 
 字面量`\unnnn`用十六进制表示一个Unicode字符。
 
+### 转换为字符串
+
+1. 使用`toString()`方法，但`null`和`undefined`值没有这个方法。
+1. `String()`函数，可将任何值转化为字符串。
+
 ## Symbol 符号类型
 
 符号类型在 ECMAScript 第 6 版中被引入 Javascript。 符号类型是唯一的并且是不可修改的。

@@ -1,0 +1,153 @@
+# Vue.js 组件
+
+> 组件 (Component) 是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。
+
+组件系统是 Vue 的另一个重要概念，因为它是一种抽象，允许我们使用小型、独立和通常可复用的组件构建大型应用。
+
+假设用户界面由导航条、显示区两部分构成，而显示区又由侧边栏和内容区构成。那么我们就可以将其抽象为如下几个组件：
+
+``` html
+<div id="app">
+  <app-nav></app-nav>
+  <app-view>
+    <app-sidebar></app-sidebar>
+    <app-content></app-content>
+  </app-view>
+</div>
+```
+
+按照组件的有效范围，我们可以分为全局组件和局部组件。
+
+## 全局组件的声明
+
+在 Vue 中注册组件很简单，使用`Vue.component`方法就可创建全局性组件：
+
+``` js
+Vue.component('todo-item', {
+  template: '<li>  </li>'
+})
+```
+
+## 全局组件的使用
+
+在html页面文件中，我们可以向使用自定义元素那样使用组件，如上面定义的组件`todo-item`，就可以这样使用：
+
+``` html
+<div id="app-7">
+  <ol>
+    <todo-item
+      v-for="item in groceryList"
+      v-bind:todo="item"
+      v-bind:key="item.id">
+    </todo-item>
+  </ol>
+</div>
+```
+
+上述代码中的`v-for`、`v-bind`是Vue.js提供的指令，实现特殊的功能，这也是Vue组件不同于自定义元素的地方。
+
+以下是组件的声明、使用、传递数据的完整案例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue中的组件</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+        <ol>
+            <!-- todo-item 就是组件，数据groceryList从父作用域app7传到子组件todo-item -->
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+    <script>
+    // 使用component方法定义全局组件，组件名为todo-item，组件的内容在template属性中定义
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+    // 创建实例，将其挂载到div#app-7元素
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { id: 0, text: '蔬菜' },
+                { id: 1, text: '奶酪' },
+                { id: 2, text: '随便其他什么人吃的东西' }
+            ]
+        }
+    })
+    </script>
+</body>
+
+</html>
+```
+
+## 局部组件的定义及使用
+
+可以通过某个 Vue 实例/组件的实例选项 `components` 注册仅在其作用域中可用的组件：
+
+```js
+var Child = {
+  template: '<div>A custom component!</div>'
+}
+new Vue({
+  // ...
+  components: {
+    // <my-component> 将只在父组件模板中可用
+    'my-component': Child
+  }
+})
+```
+
+以下是子组件（局部组件）的一个原理性案例：
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue中的子组件</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用自定义的组件 -->
+        <myheader></myheader>
+    </div>
+    <script>
+    var myHeaderChild = {
+        template: '<p>this is a child component</p>'
+    }
+    var myHeader = {
+        // 在组件中调用子组件
+        template: '<p>this is my header<headerchild></headerchild></p>',
+        // 在组件中还可以定义子组件
+        components: {
+            'headerchild': myHeaderChild
+        }
+    }
+    var app = new Vue({
+        el: '#app',
+        // 使用定义子组件的属性components定义子组件
+        components: {
+            'myheader': myHeader
+        }
+    })
+    </script>
+</body>
+
+</html>
+```

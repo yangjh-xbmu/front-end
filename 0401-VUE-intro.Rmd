@@ -1,0 +1,73 @@
+# (PART) Vue {-}
+
+# Vue 简介
+
+## Vue.js 是什么
+
+根据vue.js官方介绍：
+> Vue.js (读音 /vjuː/，类似于 view) 是一套构建用户界面的渐进式框架。
+
+## Vue.js 解决了什么问题
+
+为什么我们要使用 vue.js 呢？ vue.js 主要提供一下三大方面的功能：
+
+1. 数据绑定及渲染。将繁琐的前端数据获取、更新、显示自动化；传统前端开发面临复杂需求时，js会非常杂乱，且开发效率不高。双向绑定意味着 js、html 的数据，只要一方数据更新，则另一方面也会随之更新，只这一点，就会大大减轻开发人员的负担，提高开发效率。
+1. 组件化（模块化）。组件包含了各自的样式、功能，这样页面开发就相当于积木搭建，组件与组件之间还可以通讯，组件与 html 之间也可以通讯，可以将复杂业务需求简单化；
+1. 其他如路由、ajax、数据流等功能，方便web应用开发，如单文件 web 应用，可以通过 vue.js 轻松实现。
+
+## Vue.js 学习资源
+
+1. [vue.js官方文档](https://cn.vuejs.org/)
+2. [慕课网vuejs2视频教程](http://coding.imooc.com/learn/list/91.html)
+
+## Vue.js 实例对象
+
+Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。每个 Vue 应用都是通过 Vue 函数创建一个新的 Vue 实例开始的：
+
+``` js
+var vm = new Vue({
+  // 选项
+})
+```
+
+上述代码，实际上是调用 Vue 类的构造函数来创建 Vue 对象，在选项中，我们可以指定实例挂载到 html 中的位置，实例的数据，以及实例的功能。例如：
+
+``` js
+var my = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+})
+```
+
+当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 `data` 对象中能找到的所有的属性。当这些属性的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。现在数据和 DOM 已经被绑定在一起，所有的元素都是响应式的。当我们访问`my.message`时，其值就是`Hello Vue`。 案例如下：
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>HelloVue</title>
+    <!-- 引入vue.js -->
+    <script src="vue/vue.js"></script>
+</head>
+
+<body>
+    <!--使用vue.js模板语法-->
+    <div id="app">{{ message }}</div>
+
+    <script>
+        // 创建一个vue实例，
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
+</body>
+
+</html>
+```
