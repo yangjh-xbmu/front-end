@@ -121,7 +121,7 @@ navigator 对象主要用来检查客户端浏览器信息、浏览器版本、�
 knitr::include_graphics('images/dom.png')
 ```
 
-在上面的 DOM 中，html 位于最顶端，是 DOM 的跟节点，`head` 和 `body` 是 `html` 的子节点，它们属于同一层，并不互相包含，是兄弟关系，`h1` 和 `p` 是兄弟元素，其父元素是 `body`，`p` 的子元素是 `a` 元素。
+在上面的 DOM 中，html 位于最顶端，是 DOM 的根节点，`head` 和 `body` 是 `html` 的子节点，它们属于同一层，并不互相包含，是兄弟关系，`h1` 和 `p` 是兄弟元素，其父元素是 `body`，`p` 的子元素是 `a` 元素。
 
 ### 节点
 

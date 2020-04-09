@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        #baidumap {
+            width: 100vw;
+            height: 80vh;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+    </style>
+    <script type="text/javascript"
+        src="//api.map.baidu.com/getscript?v=3.0&ak=dQvc7K4zAKc3FXjPFziVn7YQoGo4GOy3"></script>
+    <title>地图展示</title>
+</head>
+
+<body>
+    <header>
+        <h1>百度地图 API </h1>
+    </header>
+    <main>
+        <div id="baidumap"></div>
+    </main>
+    <footer>
+        <p>页脚信息</p>
+    </footer>
+    <script type="text/javascript">
+        // 百度地图API功能
+        var map = new BMap.Map("baidumap");    // 创建Map实例
+        map.centerAndZoom(new BMap.Point(104.162382, 35.938227), 18);  // 初始化地图,设置中心点坐标和地图级别
+        // 设置鼠标滑轮滚动
+        map.enableScrollWheelZoom(true);
+        // 自定义地图样式
+        map.setMapStyleV2({
+            styleId: 'b6698db808b025ce5d16c24db50ff262'
+        });
+        var point = new BMap.Point(104.162382, 35.938227);
+        var marker = new BMap.Marker(point);        // 创建标注    
+        map.addOverlay(marker);                     // 将标注添加到地图中 
+        // 
+        var label = new BMap.Label("行政楼、新闻传播学院");
+        marker.setLabel(label);
+
+        // var geolocation = new BMap.Geolocation();
+        // geolocation.getCurrentPosition(function (r) {
+        //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        //         var mk = new BMap.Marker(r.point);
+        //         map.addOverlay(mk);
+        //         map.panTo(r.point);
+        //         alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+        //     }
+        //     else {
+        //         alert('failed' + this.getStatus());
+        //     }
+        // }, { enableHighAccuracy: true })
+
+    </script>
+</body>
+
+</html>
