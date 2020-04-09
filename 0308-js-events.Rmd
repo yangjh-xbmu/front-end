@@ -74,7 +74,7 @@
 
 ### DOM 监听事件的方法
 
-DOM 定义了两个方法分别用以添加和删除监听函数，即 addEventListener() 和 removeEventListener()。这两个函数的语法如下：
+DOM 定义了两个方法分别用以添加和删除监听函数，即 `addEventListener()` 和 `removeEventListener()`。这两个函数的语法如下：
 
 ``` javascript
 [object].addEventListener("事件名称", 监听函数名称，是否用于捕获阶段）;
@@ -144,13 +144,13 @@ DOM 定义了两个方法分别用以添加和删除监听函数，即 addEventL
 
 如何在这种添加事件方式下获取到事件对象？IE 中 event 是作为全局对象的，所以直接使用 event 即可，如下：
 
-``` javascript
+```js
 window.event
 ```
 
 而 W3C 定义的 DOM 中，是把事件对象作为事件处理函数的第一个参数传入进去，如下：
 
-``` javascript
+```js
 document.onclick = function (evt) {//事件对象只能在对应的事件处理函数内部可以访问到
 alert(evt);
 };
