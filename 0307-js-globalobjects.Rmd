@@ -65,6 +65,23 @@ function clock() {
 </html>
 ```
 
+### 控制台
+
+在开发学习过程中，我们经常使用console.log()输出信息，方便调试。
+
+可以使用控制台中的计时功能，获取代码执行的时间，以便优化代码质量。
+
+```js
+console.time("timer");
+for(var i=0;i<10000;i++){}
+console.assert(a===1,"这时候条件是a==1,实际a是1");
+console.assert(b===1,"这时候条件是b==1，实际b是2");
+console.warn("这是一段警告信息");
+console.error("出错啦，你的配置信息有误");
+console.timeEnd("timer");
+```
+
+
 ### navigator 对象
 
 navigator 对象主要用来检查客户端浏览器信息、浏览器版本、操作系统的类型等等。navigator 对象最常用的属性是 userAgent，该属性能读取浏览器及操作系统的信息。
@@ -360,20 +377,7 @@ JSON 用于描述资料结构，有两种结构存在：
 
 返回指定值的 JSON 字符串。
 
-## 控制台
 
-在开发学习过程中，我们经常使用console.log()输出信息，方便调试。
+## 参考资料
 
-### 性能分析
-
-可以使用控制台中的计时功能，获取代码执行的时间，以便优化代码质量。
-
-```js
-console.time("timer");
-for(var i=0;i<10000;i++){}
-console.assert(a===1,"这时候条件是a==1,实际a是1");
-console.assert(b===1,"这时候条件是b==1，实际b是2");
-console.warn("这是一段警告信息");
-console.error("出错啦，你的配置信息有误");
-console.timeEnd("timer");
-```
+1. <https://www.w3.org/DOM/DOMTR>

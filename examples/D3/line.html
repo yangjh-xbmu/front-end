@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="d3.js"></script>
+    <title>Document</title>
+    <style>
+        #container {
+            background-color: #CCC;
+            width: 500px;
+            height: 250px;
+
+        }
+
+        path {
+            fill: none;
+            stroke: yellowgreen;
+            stroke-width: 2px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        var width = 500, height = 250
+        margin = {
+            left: 50,
+            top: 30,
+            right: 20,
+            bottom: 20
+        }
+        gWidth = width - margin.left - margin.right
+        gHeight = height - margin.top - margin.bottom
+
+        var svg = d3.select("#container")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+
+
+        g = d3.select("svg").append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+        var data = [1, 3, 5, 7, 6, 9, 4]
+
+        var scaleX = d3.scaleLinear()
+            .domain([0, data.length - 1])
+            .range([0, gWidth])
+        var scaleY = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .range([gHeight, 0])
+
+        var lineGenerator = d3.line()
+            .x(function (d, i) { return scaleX(i) })
+            .y(function (d) { return scaleY(d) })
+            .curve(d3.curveCardinal)
+
+        d3.select('g')
+            .append("path")
+            .attr("d", lineGenerator(data))
+
+        var xAxis = d3.axisBottom().scale(scaleX)
+        yAxis = d3.axisLeft().scale(scaleY)
+
+        g.append("g")
+            .call(xAxis)
+            // .attr("transform", "translate(0," + gHeight + ")")
+            .attr("transform", "translate(0," + gHeight + ")")
+
+        g.append("g")
+            .call(yAxis)
+            .append("text")
+            .text("价格（元）")
+
+
+    </script>
+</body>
+
+</html>

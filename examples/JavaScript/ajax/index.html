@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>异步获取数据并展示</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center">异步获取数据并展示</h1>
+    </header>
+    <main></main>
+    <footer></footer>
+
+    <script>
+        // try catch
+        // go();
+        try {
+            go();
+        } catch (error) {
+            console.log(error)
+        }
+        // 定义一个可以使用回调函数的函数。
+        function func1(a, func2) {
+            if (a > 10 && typeof func2 == 'function') {
+                func2()
+            }
+        }
+
+        // 调用函数，
+        func1(11, function () {
+            console.log('this is a callback')
+        })
+        func1();
+        func1(1);
+
+        function doSomething(msg, callback) {
+            alert(msg);
+            if (typeof callback == "function")
+                callback();
+        }
+        // doSomething("存5000块", function () {
+        //     alert("稍等，马上办理");
+        //     alert('2分钟后，您的业务已办理完毕');
+        // });
+
+
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                Math.random() > 0.5 ? resolve('success') : reject('fail');
+            }, 1000)
+        });
+
+        console.log(p);
+
+        // then()有俩函数参数。
+        p.then(
+            (result) => {
+                console.log(result);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+
+
+        var results = null;
+        // 
+        axios.get('./student-address.csv')
+            .then(function (response) {
+                results = response.data;
+                // debugger
+                console.log(response);
+            }, (err) => {
+                console.log(err)
+            });
+        console.log(results);
+    </script>
+</body>
+
+</html>

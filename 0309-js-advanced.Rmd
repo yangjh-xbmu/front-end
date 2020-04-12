@@ -1,0 +1,121 @@
+# JavaScript 进阶
+
+## 错误处理
+
+`try...catch`语句标记要尝试的语句块，并指定一个出现异常时抛出的响应。
+
+`try`语句包含了由一个或者多个语句组成的`try`块，和至少一个`catch`块或者一个`finally`块的其中一个，或者两个兼有， 下面是三种形式的`try`声明：
+
+```js
+try...catch
+try...finally
+try...catch...finally
+```
+
+`catch`子句包含`try`块中抛出异常时要执行的语句。也就是，你想让`try`语句中的内容成功， 如果没成功，你想控制接下来发生的事情，这时你可以在`catch`语句中实现。 如果在`try`块中有任何一个语句（或者从`try`块中调用的函数）抛出异常，控制立即转向`catch`子句。如果在`try`块中没有异常抛出，会跳过`catch`子句。
+
+`finally`子句在`try`块和`catch`块之后执行但是在下一个`try`声明之前执行。无论是否有异常抛出或捕获它总是执行。
+
+## 回调函数 callback
+
+> A callback is a function that is passed as an argument to another function and is executed after its parent function has completed.
+
+在 JavaScript 中，回调函数具体的定义为：函数 A 作为参数（函数引用）传递到另一个函数 B 中，并且函数 B 运行完成后再执行函数 A。我们就把函数 A 叫做回调函数。例如：
+
+```js
+// 当参数 a 大于 10 且参数 func2 是一个方法时 执行 func2
+function func1(a, func2) {
+    if (a > 10 && typeof func2 == 'function') {
+        func2()
+    }
+}
+func1(11, function() {
+    console.log('this is a callback')
+})
+
+function doSomething(msg, callback) {
+    alert(msg);
+    if (typeof callback == "function")
+    callback();
+}
+
+doSomething("存 5000 块", function () {
+    alert("稍等，马上办理");
+    alert('2 分钟后，您的业务已办理完毕');
+});
+```
+
+回调与同步、异步并没有直接的联系，回调只是一种实现方式，既可以有同步回调，也可以有异步回调。
+
+回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用，用于对该事件或条件进行响应。
+
+回调本质上是一种设计模式。设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。
+
+在 1994 年，由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides 四人合著出版了一本名为 Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素） 的书，该书首次提到了软件开发中设计模式的概念。四位作者合称 GOF（四人帮，全拼 Gang of Four）。他们所提出的设计模式主要是基于以下的面向对象设计原则。
+
+* 对接口编程而不是对实现编程。
+* 优先使用对象组合而不是继承。
+
+## 同步与异步
+
+同步 (Synchronous) 和异步 (Asynchronous) 用来形容一次函数调用时的时间序列。
+
+* 同步函数调用一旦开始，调用者必须等到函数调用返回后，才能继续后续的行为。
+* 异步函数调用更像一个消息传递，一旦开始，函数调用就会立即返回，调用者就可以继续后续的操作。而异步函数通常会在另外一个线程中，“真实”地执行着。整个过程，不会阻碍调用者的工作。
+
+## 为什么使用 promise
+
+一般来说我们会碰到的回调嵌套都不会很多，一般就一到两级，但是某些情况下，回调嵌套很多时，代码就会非常繁琐，会给我们的编程带来很多的麻烦，难以维护和调试，一旦出现 bug，牵一发而动全身，这种情况俗称回调地狱。例如：
+
+```js
+loadImg('a.jpg', function() {
+    loadImg('b.jpg', function() {
+        loadImg('c.jpg', function() {
+            //...
+        });
+    });
+});
+```
+
+当异步的任务很多的时候，维护大量的 callback 将是一场灾难。而 Promise 则可以让我们通过链式调用的方法去解决回调嵌套的问题，使我们的代码更容易理解和维护，而且 Promise 还增加了许多有用的特性，让我们处理异步编程得心应手。
+
+## Promise 对象
+
+Promise 对象是一个代理对象（代理一个值），被代理的值在 Promise 对象创建时可能是未知的。它允许你为异步操作的成功和失败分别绑定相应的处理方法（handlers）。 这让异步方法可以像同步方法那样返回值，但并不是立即返回最终执行结果，而是一个能代表未来出现的结果的 promise 对象。
+
+一个 Promise 有以下几种状态：
+
+1. pending: 初始状态，既不是成功，也不是失败状态。
+1. fulfilled: 意味着操作成功完成。
+1. rejected: 意味着操作失败。
+
+```js
+let p = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        Math.random() > 0.5 ? resolve('success') : reject('fail');
+    }, 1000)
+});
+
+console.log(p);
+
+p.then((result) => {
+    console.log(result);
+}, (err) => {
+    console.log(err);
+});
+```
+
+1. 因为 `Promise` 是一个构造函数，所以我们使用了 `new` 操作符来创建 `promise`。
+1. 构造函数 `Promise` 的参数是一个函数（暂时叫它 func），这个函数（func）有两个参数 `resolve` 和 `reject`，它们分别是两个函数，这两个函数的作用就是将 `promise` 的状态从 `pending`（等待）转换为 `resolved`（已解决）或者从 `pending`（等待）转换为 `rejected`（已失败）。
+1. 创建后的 `promise` 有一些方法，`then` 和 `catch`。当然我们也可以人为的在 `Promise` 函数上添加一些满足我们自己需求的方法，方便每一个 `promise` 对象使用。
+1. `then()` 方法返回一个 `Promise`。它最多需要有两个参数：`Promise` 的成功和失败情况的回调函数。
+1. `Promise` 函数体的内部包裹着一个异步的请求或者操作或者函数；然后我们可以在这个异步的操作完成的时候使用 `resolve` 函数将我们获得的结果传递出去，或者使用 `reject` 函数将错误的消息传递出去。
+1. 每个操作都返回一样的 `promise` 对象，保证链式操作。
+1. 每个链式都通过 `then` 方法。
+1. 每个操作内部允许犯错，出了错误，统一由 `catch` `error` 处理。
+1. 操作内部，也可以是一个操作链，通过 `reject` 或 `resolve` 再造流程。
+
+## 参考资料
+
+1. <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise>
+1. <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then>
