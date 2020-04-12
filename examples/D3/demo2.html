@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="d3.js"></script>
+    <style>
+        #container {
+            background-color: #CCC;
+            width: 500px;
+            height: 250px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script>
+        var width = 500, height = 250
+        var barPadding = 4;
+        margin = {
+            left: 50,
+            top: 30,
+            right: 20,
+            bottom: 20
+        }
+        gWidth = width - margin.left - margin.right
+        gHeight = height - margin.top - margin.bottom
+
+        var svg = d3.select("#container")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+
+
+        g = d3.select("svg").append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+        var dataset = {
+            x: ["赵", "钱", "孙", "李", "周", "吴", "郑", "王"],
+            y: [40, 30, 50, 70, 90, 20, 10, 40]
+        };
+        var scaleX = d3.scaleBand().domain(dataset.x).rangeRound([0, width]).padding(0.1);
+        // d3.scaleBand().domain(Xdatas).rangeRound([0, width]).padding(0.1),
+        // var scaleX = d3.scaleLinear()
+        //     .domain([0, dataset.length])
+        //     .range([0, gWidth])
+        var scaleY = d3.scaleLinear()
+            .domain([0, d3.max(dataset.y)])
+            .rangeRound([gHeight, 0]);
+
+        g.selectAll("rect")
+            .data(dataset.y)
+            .enter()
+            .append("rect")
+            .attr("x", function (d, i) {
+                return i * (gWidth / dataset.y.length);
+            })
+            .attr("y", function (d) {
+                return gHeight - d;
+            })
+            .attr("width", gWidth / dataset.y.length - barPadding)
+            .attr("height", function (d) {
+                return d;
+            })
+            .attr("fill", function (d) {
+                return "rgb(0, 0, " + (d * 10) + ")";
+            })
+
+        g.selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .text(function (d) {
+                return d;
+            })
+            .attr("x", function (d, i) {
+                return (gWidth / dataset.length - barPadding) / 2 + i * gWidth / dataset.length;
+            })
+            .attr("y", function (d) {
+                return gHeight - d - 5;
+            })
+            .attr("font-family", "宋体")
+            .attr("font-size", "11px")
+            .attr("fill", "black")
+            .attr("text-anchor", "middle")
+        var xAxis = d3.axisBottom().scale(scaleX)
+
+        g.append("g")
+            .call(xAxis)
+            .attr("transform", "translate(0," + gHeight + ")")
+        yAxis = d3.axisLeft().scale(scaleY)
+        g.append("g")
+            .call(yAxis)
+    </script>
+</body>
+
+</html>

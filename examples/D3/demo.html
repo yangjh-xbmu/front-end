@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 入门</title>
+    <script src="https://cdn.bootcss.com/d3/5.15.1/d3.min.js"></script>
+    <style>
+        #d3Stage {
+            background-color: #CCC;
+            width: 950px;
+            height: 400px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- <div id="d3Stage"></div> -->
+
+    <script>
+        // const width = 950; //画布的宽
+        // const height = 400; //画布的长
+        // const padding = { left: 55, right: 30, top: 20, bottom: 20 };
+
+        // const svg = d3.select("d3Stage") //在指向位置初始化画布
+        //     .append("svg")
+        //     .attr("width", width)
+        //     .attr("height", height);
+
+        // const data = [4, 8, 15, 16, 23, 42]
+
+        // let div1 = document.createElement("div");
+        // div1.innerHTML = "Hello, world!";
+        // document.body.appendChild(div1);
+
+
+        // d3.select("body")
+        //     .append("p")
+        //     .text("New paragraph!");
+
+        // d3.select("body")
+        //     .selectAll("p")
+        //     .data(data)
+        //     .enter()
+        //     .append("p")
+        //     .text(function (d) { return d; })
+        //     .style("color", function (d) {
+        //         if (d > 15) {   //Threshold of 15
+        //             return "red";
+        //         } else {
+        //             return "black";
+        //         }
+        //     })
+        //     .attr("fill", "grey");
+
+        // d3.selectAll("p")
+        //     .attr("class", "graf")
+        //     .style("color", "blue");
+
+        // d3.select("body")
+        //     .append("svg")
+        //     .attr("width", 960)
+        //     .attr("height", 500)
+        //     .append("g")
+        //     .attr("transform", "translate(20,20)")
+        //     .append("rect")
+        //     .attr("width", 920)
+        //     .attr("height", 460);
+        // d3.selectAll("p").on("click", function () {
+        //     d3.select(this).style("color", "red");
+        // });
+
+
+
+        // var w = 500;
+        // var h = 50;
+        // var svg = d3.select("body")
+        //     .append("svg")
+        //     .attr("width", w)   // <-- Here
+        //     .attr("height", h);
+
+        // var dataset = [5, 10, 15, 20, 25];
+        // var circles = svg.selectAll("circle")
+        //     .data(dataset)
+        //     .enter()
+        //     .append("circle");
+
+        // circles.attr("cx", function (d, i) {
+        //     return (i * 50) + 25;
+        // })
+        //     .attr("cy", h / 2)
+        //     .attr("r", function (d) {
+        //         return d;
+        //     });
+
+        var w = 500;
+        var h = 300;
+
+        var barPadding = 4;
+
+        const dataset = [4, 8, 15, 33, 16, 23, 42]
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        svg.selectAll("rect")
+            .data(dataset)
+            .enter()
+            .append("rect")
+            .attr("x", function (d, i) {
+                return i * (w / dataset.length);  //Bar width of 20 plus 1 for padding
+            })
+            .attr("y", function (d) {
+                return h - d;  //Height minus data value
+            })
+            .attr("width", w / dataset.length - barPadding)
+            .attr("height", function (d) {
+                return d;
+            }).attr("fill", function (d) {
+                return "rgb(204, 204, " + (d * 10) + ")";
+            })
+
+        svg.selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .text(function (d) {
+                return d;
+            })
+            // .attr("x", function (d, i) {
+            //     return i * (w / dataset.length);  //Bar width of 20 plus 1 for padding
+            // })
+            // .attr("y", function (d) {
+            //     return h - d;  //Height minus data value
+            // })
+            .attr("x", function (d, i) {
+                return (w / dataset.length - barPadding) / 2 + i * w / dataset.length;
+            })
+            .attr("y", function (d) {
+                return h - d - 5;
+            })
+            .attr("font-family", "宋体")
+            .attr("font-size", "11px")
+            .attr("fill", "black")
+            .attr("text-anchor", "middle")
+
+        var scaleX = d3.scaleLinear()
+            .domain([0, dataset.length])
+            .range([0, w])
+        var scaleY = d3.scaleLinear()
+            .domain([0, d3.max(dataset)])
+            .range([h, 0])
+
+
+        var xAxis = d3.axisBottom().scale(scaleX)
+        yAxis = d3.axisLeft().scale(scaleY)
+
+        g = d3.select("svg").append("g")
+
+        g.append("g")
+            .call(xAxis)
+            .attr("transform", "translate(0," + h + ")")
+        g.append("g")
+            .call(yAxis)
+    </script>
+</body>
+
+</html>

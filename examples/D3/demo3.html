@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>D3</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .bar {
+            border: 1px solid #0b3536;
+            border-radius: 6px;
+            fill: #0098d8;
+        }
+
+        #bar .barText {
+            fill: #f5faf8;
+            font-weight: 500;
+        }
+
+        .axisY text,
+        .axisX text,
+        .headerText text {
+            fill: #0b3536;
+        }
+
+        #bar svg {
+            background-color: #f5faf8;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div id='bar'></div>
+    </div>
+</body>
+
+</html>
+<script src="d3.js"></script>
+<script>
+    /** V4柱状图初始化 **/
+    function BarInit(width, height, rectPadding, padding, data) {
+
+        // 获取x轴的数据
+        var Xdatas = data.map(function (d) {
+            return d.name;
+        });
+
+        // 获取y轴的数据
+        var values = data.map(function (d) {
+            return d.value;
+        });
+
+        // 创建X,Y轴比例尺
+        var xScale = d3.scaleBand().domain(Xdatas).rangeRound([0, width]).padding(0.1),
+            yScale = d3.scaleLinear().domain([0, d3.max(values)]).rangeRound([height, 0]);
+
+
+        // 将svg容器添加到Dom中
+        var svg = d3.select('#bar').append('svg')
+            .attr('width', width + padding.left + padding.right)
+            .attr('height', height + padding.top + padding.bottom);
+
+        // 将group元素添加到svg容器中
+        var g = svg.append('g')
+            .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
+
+        // 添加图表的表头
+        g.attr('class', 'headerText')
+            .append('text')
+            .attr('transform', 'translate(' + (width / 2) + ',' + (-padding.top / 2) + ')')
+            .attr('text-anchor', 'middle')
+            .attr('font-weight', 600)
+            .text('柱状图案例');
+
+        // 添加X轴
+        g.append('g')
+            .attr('class', 'axisX')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(d3.axisBottom(xScale))
+            .attr('font-weight', 'bold');
+
+        // 添加Y轴
+        g.append('g')
+            .attr('class', 'axisY')
+            .call(d3.axisLeft(yScale).ticks(10));
+
+        // 创建盛放矩形的容器
+        var chart = g.selectAll('.bar')
+            .data(data)
+            .enter().append('g')
+
+        // 添加矩形元素
+        chart.append('rect')
+            .attr('class', 'bar')
+            .attr('x', function (d) {
+                return xScale(d.name);
+            })
+            .attr('y', function (d) {
+                return yScale(d.value);
+            })
+            .attr('height', function (d) {
+                return height - yScale(d.value);
+            })
+            .attr('width', xScale.bandwidth());
+
+        // 添加矩形内提示文字
+        chart.append('text')
+            .attr('class', 'barText')
+            .attr('x', function (d) {
+                return xScale(d.name);
+            })
+            .attr('y', function (d) {
+                return yScale(d.value);
+            })
+            .attr('dx', xScale.bandwidth() / 2)
+            .attr('dy', 20)
+            .attr('text-anchor', 'middle')
+            .text(function (d) {
+                console.log("d.value", d.value)
+                return d.value;
+            });
+
+        // 添加hover事件
+        chart.on('mouseover', function (d) {
+            d3.select(this).attr('opacity', 0.7);
+        })
+            .on('mouseout', function (d) {
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .attr('opacity', 1)
+            });
+    }
+
+    const padding = {
+        top: 50,
+        right: 20,
+        bottom: 30,
+        left: 30
+    };
+    const width = 760 - padding.left - padding.right;
+    const height = 380 - padding.top - padding.bottom;
+    const rectPadding = 4; //矩形之间的空白
+    var data = [{
+        name: '赵',
+        value: 40
+    },
+    {
+        name: '钱',
+        value: 60
+    },
+    {
+        name: '孙',
+        value: 70
+    },
+    {
+        name: '李',
+        value: 80
+    },
+    {
+        name: '周',
+        value: 53
+    },
+    {
+        name: '吴',
+        value: 48
+    },
+    {
+        name: '郑',
+        value: 42
+    },
+    {
+        name: '王',
+        value: 84
+    },
+    {
+        name: '冯',
+        value: 87
+    },
+    {
+        name: '陈',
+        value: 66
+    }
+    ]; //数据
+
+    BarInit(width, height, rectPadding, padding, data);
+</script>

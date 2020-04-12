@@ -1,0 +1,328 @@
+# (PART) D3 {-}
+
+# D3
+
+## D3.js 简介
+
+[D3.js](https://d3js.org) 是一个可以基于数据来操作文档的 JavaScript 库。可以帮助你使用 HTML, CSS, SVG 以及 Canvas 来展示数据。D3 遵循现有的 Web 标准，可以不需要其他任何框架独立运行在现代浏览器中，它结合强大的可视化组件来驱动 DOM 操作。作者是美国计算机科学家和数据可视化专家 [Mike Bostock](https://observablehq.com/@mbostock)，曾在纽约时报新媒体部门就职多年，其在2011年根据工作需要创作了D3js，《纽约时报》称他为“数字超级巨星”。在纽约时报工作期间，他领导复杂的数据可视化项目，帮助纽约时报获得了2013、2014和2015年Gerald Loeb图像/视觉奖。杰拉德·勒布奖（Gerald Loeb Award），是一个以鼓励记者通过商业，金融和经济领域报道保护私人投资者和公众为目的的奖项。该奖项成立于1958年，主要表彰杰出的商业和金融新闻报道。
+
+在D3.js官网，可以看到许多可交互的案例，能为我们学习提供资源和动力。Mike Bostock 特别执着于案例创作和分享，他曾说：
+
+> examples are about demonstrating the potential value of ideas.
+
+学习D3，了解了必要的基础知识后，就应该阅读并熟悉[官方英文手册](https://github.com/d3/d3/wiki)，鉴于准确性和时效性的原因，并不建议阅读网络上存在的各种中文手册。
+
+## D3.js必要基础
+
+如果使用原始JavaScript，我们要在页面中添加一个元素，通常的做法是：
+
+```js
+let div = document.createElement("div");
+div.innerHTML = "Hello, world!";
+document.body.appendChild(div)
+```
+
+### 链式操作
+
+使用D3插入一个节点的做法是：
+
+```js
+d3.select("body").append("p").text("New paragraph!");
+```
+
+是不是更加流畅和易读？人们把这种源于jQuery之类的早期JavaScript库的操作方式叫作**链式操作**，
+
+### 绑定数据
+
+```JS
+let data = [4, 8, 15, 16, 23, 42]
+
+d3.select("body")
+            .selectAll("p")
+            .data(data)
+            .enter()
+            .append("p")
+            .text("New paragraph!");
+```
+
+怎么能选择根本就不存在的元素呢? 因为根本就还不存在任何段落，它会返回一个空选择。将这个空选择对应于”将会现身”的很多段落。解决这个问题的关键在于`enter()`方法，这是真正的魔法所在。
+
+.data(data) — 对数据值进行计数和解析。我们的数据集中有5个值，所以通过此处的代码都会被执行5次，分别对应于5个值。
+
+.`enter()` — 为了生成新的绑定了数据的元素，你必须使用`enter()`方法。此方法比较DOM元素和待处理数据个数。如果数据值的个数多于相应的DOM元素，则`enter()`方法会生成新的占位元素，在每个占位元素上进行余下的操作。每个占位元素都会被传递给链中下一个方法。
+
+.`append("p")` — 接收由`enter()`选择的(新生成的)点位元素，然后在DOM中插入一个p元素。新p元素的引用会被传递给链中下一个方法。
+
+.`text("New paragraph!")` — 接收新生成的p元素的引用，然后插入(覆盖)文本。
+
+数据绑定到哪里去了？为什么看不到数据？D3将数据绑定到一个元素上时，该数据并没有在DOM中出现，而是作为元素的`__data__`属性而存在于内存中。重要的是，可以通过console查看。如果想要数字显示出来，可以通过`.text(function (d) { return d; })`
+
+能够使用这种语法的原因在于，text(), attr()等许多D3方法支持将一个函数作为一个参数。
+
+### d3-selection
+
+Selections 允许对文档对象模型（DOM）进行强大的数据驱动转换：设置属性、样式、属性、HTML或文本内容，
+
+d3.selectAll("p")
+    .attr("class", "graf")
+    .style("color", "red");
+    .text('hello')
+
+### 用d3生成svg
+
+```js
+        var w = 500;
+        var h = 50;
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        var dataset = [5, 10, 15, 20, 25];
+        var circles = svg.selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle");
+
+        circles.attr("cx", function (d, i) {
+            return (i * 50) + 25;
+        })
+            .attr("cy", h / 2)
+            .attr("r", function (d) {
+                return d;
+            });
+```
+
+## 制作柱状图
+
+### 准备工作
+
+1. 准备HTML
+1. 引入d3.js
+
+### 准备图表所在容器
+
+```html
+<body>
+    <div class='container'>
+        <div id='bar'></div>
+    </div>
+</body>
+```
+
+### 设定图表大小
+
+```js
+const padding = {
+    top: 50,
+    right: 20,
+    bottom: 30,
+    left: 30
+};
+const width = 760 - padding.left - padding.right;
+const height = 380 - padding.top - padding.bottom;
+const rectPadding = 4; //矩形之间的空白
+```
+
+### 准备数据
+
+```js
+var data = [{
+        name: '赵',
+        value: 40
+    },
+    {
+        name: '钱',
+        value: 60
+    },
+    {
+        name: '孙',
+        value: 70
+    },
+    {
+        name: '李',
+        value: 80
+    },
+    {
+        name: '周',
+        value: 53
+    },
+    {
+        name: '吴',
+        value: 48
+    },
+    {
+        name: '郑',
+        value: 42
+    },
+    {
+        name: '王',
+        value: 84
+    },
+    {
+        name: '冯',
+        value: 87
+    },
+    {
+        name: '陈',
+        value: 66
+    }
+    ];
+```
+
+### 在svg中加入到容器中
+
+```js
+var svg = d3.select('#bar').append('svg')
+    .attr('width', width + padding.left + padding.right)
+    .attr('height', height + padding.top + padding.bottom);
+```
+
+### 在svg中加入g元素作为子容器
+
+```js
+var g = svg.append('g')
+    .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
+```
+
+### 添加表头
+
+```js
+g.attr('class', 'headerText')
+    .append('text')
+    .attr('transform', 'translate(' + (width / 2) + ',' + (-padding.top / 2) + ')')
+    .attr('text-anchor', 'middle')
+    .attr('font-weight', 600)
+    .text('柱状图案例');
+```
+
+### 创建比例尺
+
+```js
+// 获取x轴的数据
+var Xdatas = data.map(function (d) {
+    return d.name;
+});
+
+// 获取y轴的数据
+var values = data.map(function (d) {
+    return d.value;
+});
+
+// 创建X,Y轴比例尺
+var xScale = d3.scaleBand().domain(Xdatas).rangeRound([0, width]).padding(0.1),
+    yScale = d3.scaleLinear().domain([0, d3.max(values)]).rangeRound([height, 0]);
+```
+
+### 添加x轴和y轴
+
+```js
+// 添加X轴
+g.append('g')
+    .attr('class', 'axisX')
+    .attr('transform', 'translate(0,' + height + ')')
+    .call(d3.axisBottom(xScale))
+    .attr('font-weight', 'bold');
+// 添加Y轴
+g.append('g')
+    .attr('class', 'axisY')
+    .call(d3.axisLeft(yScale).ticks(10));
+```
+
+### 添加放直方的容器
+
+```js
+var chart = g.selectAll('.bar')
+    .data(data)
+    .enter().append('g')
+```
+
+### 添加数据
+
+```js
+// 添加矩形元素
+chart.append('rect')
+    .attr('class', 'bar')
+    .attr('x', function (d) {
+        return xScale(d.name);
+    })
+    .attr('y', function (d) {
+        return yScale(d.value);
+    })
+    .attr('height', function (d) {
+        return height - yScale(d.value);
+    })
+    .attr('width', xScale.bandwidth());
+```
+
+### 添加说明文字
+
+```js
+chart.append('text')
+    .attr('class', 'barText')
+    .attr('x', function (d) {
+        return xScale(d.name);
+    })
+    .attr('y', function (d) {
+        return yScale(d.value);
+    })
+    .attr('dx', xScale.bandwidth() / 2)
+    .attr('dy', 20)
+    .attr('text-anchor', 'middle')
+    .text(function (d) {
+        console.log("d.value", d.value)
+        return d.value;
+    });
+```
+
+### 添加hover事件
+
+```js
+chart.on('mouseover', function (d) {
+    d3.select(this).attr('opacity', 0.7);
+})
+    .on('mouseout', function (d) {
+        d3.select(this)
+            .transition()
+            .duration(500)
+            .attr('opacity', 1)
+    });
+```
+
+### 设置样式
+
+```html
+<style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .bar {
+            border: 1px solid #0b3536;
+            border-radius: 6px;
+            fill: #0098d8;
+        }
+
+        #bar .barText {
+            fill: #f5faf8;
+            font-weight: 500;
+        }
+
+        .axisY text,
+        .axisX text,
+        .headerText text {
+            fill: #0b3536;
+        }
+
+        #bar svg {
+            background-color: #f5faf8;
+        }
+
+    </style>
+```
+
+## 参考资料
+
+1. <https://github.com/d3/d3/wiki>
+1. <http://pkuwwt.github.io/d3-tutorial-cn/about.html>
