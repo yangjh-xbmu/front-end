@@ -121,7 +121,6 @@ const padding = {
 };
 const width = 760 - padding.left - padding.right;
 const height = 380 - padding.top - padding.bottom;
-const rectPadding = 4; //矩形之间的空白
 ```
 
 ### 准备数据
@@ -213,6 +212,8 @@ var values = data.map(function (d) {
 var xScale = d3.scaleBand().domain(Xdatas).rangeRound([0, width]).padding(0.1),
     yScale = d3.scaleLinear().domain([0, d3.max(values)]).rangeRound([height, 0]);
 ```
+
+其中`padding()`用来设定比例尺分段的间隔，值的范围必须在 `[0, 1]` 之间
 
 ### 添加x轴和y轴
 
@@ -326,3 +327,17 @@ chart.on('mouseover', function (d) {
 
 1. <https://github.com/d3/d3/wiki>
 1. <http://pkuwwt.github.io/d3-tutorial-cn/about.html>
+
+## 选集selection
+
+在D3中，我们用d3.select方法来选取单个元素。该select方法使用CSS3选择器字符串或者操作对象的引用作为参数，并返回D3选集。随后，用**级联修饰函数**对该选集的属性、内容以及HTML进行操作。这个选择器也可以用来选择多个元素，但是最终只返回选集中第一个匹配的元素。
+
+```js
+d3.selectAll("div") // <-- A
+            .attr("class", "red box") // <-- B
+            .each(function (d, i) { // <-- C
+                d3.select(this).append("h1").text(i); // <-- D
+            });
+```
+
+第C行定义了一个参数为d、i的迭代函数。第D行则更加有趣，在开头部分，d3.select函数将this封装为一个d3选集，这个选集是一个用变量this表示的且包含当前DOM元素的单元素选集。
