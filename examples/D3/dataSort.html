@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数据排序与交互</title>
+
+    <script type="text/javascript" src="d3.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <style>
+        h1,
+        h2,
+        h3 {
+            font-weight: bold;
+        }
+
+        .h-bar {
+            background-color: #ccc;
+            text-align: right;
+            margin-top: 3px;
+        }
+
+        .h-bar span {
+            font-size: 14px;
+            margin-right: 5px;
+            color: #000;
+        }
+
+        .selected {
+            background-color: #f08080;
+        }
+
+        footer {
+            font-size: 12px;
+            background-color: #ddd;
+            text-align: center;
+        }
+
+        footer p {
+            height: 5ch;
+            line-height: 5ch;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center my-5">数据排序与交互</h1>
+    </header>
+    <main>
+        <section class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8" id="stage"></div>
+            </div>
+        </section>
+        <section class="container my-5">
+            <div class="row justify-content-center">
+                <div class="control-group col-md-8">
+                    <button class="btn btn-primary" onclick="sort(compareByExpense)">
+                        按金额排序
+                    </button>
+                    <button class="btn btn-primary" onclick="sort(compareByCategory)">
+                        按类别排序
+                    </button>
+                    <button class="btn btn-primary" onclick="select('伙食')">
+                        伙食
+                    </button>
+                    <button class="btn btn-primary" onclick="select('娱乐')">
+                        娱乐
+                    </button>
+                    <button class="btn btn-primary" onclick="select('学习')">
+                        学习
+                    </button>
+                    <button class="btn btn-primary" onclick="select()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container-fluid mt-5 fixed-bottom">
+        <p>《网络编辑与制作》课程练习</p>
+    </footer>
+    <script src="dataSort.js"></script>
+
+</body>
+
+</html>

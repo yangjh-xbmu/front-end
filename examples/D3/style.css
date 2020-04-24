@@ -1,0 +1,36 @@
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+.h-bar {
+    background-color: #ccc;
+    text-align: right;
+    margin-top: 3px;
+}
+
+.h-bar span {
+    font-size: 14px;
+    margin-right: 5px;
+    color: #000;
+    display: inline-block;
+}
+
+.name {
+    float: left;
+    margin-left: 2px;
+}
+
+.selected {
+    background-color: #f08080;
+}
+
+footer {
+    font-size: 12px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+footer p {
+    height: 5ch;
+    line-height: 5ch;
+}

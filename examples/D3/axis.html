@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坐标轴</title>
+    <script type="text/javascript" src="d3.js"></script>
+</head>
+
+<body>
+    <script>
+        let margin = ({ top: 40, right: 40, bottom: 40, left: 40 })
+        let font_size = 16
+        let limit = 10
+        let domain = limit
+        let minX = -domain;
+        let maxX = domain
+        let ticks = 10
+        let width = 400
+        let height = width
+        let xsc = d3.scaleLinear()
+            .domain([minX, maxX])
+            .range([margin.left, width - margin.right])
+        let xAxis = svg => svg
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+            .call(d3.axisBottom(xsc))
+            .attr("font-size", font_size)
+            .selectAll(".tick line").clone()
+            .attr("y2", -height)
+            .attr("stroke-opacity", 0.1)
+        let minY = -domain
+        let maxY = domain
+        let ysc = d3.scaleLinear()
+            // .domain([minY, maxY])
+            .domain([minY, maxY])
+            .range([height - margin.bottom, margin.top])
+        let yAxis = svg => svg
+            .attr("transform", `translate(${margin.left},0)`)
+            .call(d3.axisLeft(ysc))
+            .attr("font-size", font_size)
+            .selectAll(".tick line").clone()
+            .attr("x2", width)
+            .attr("stroke-opacity", 0.1);
+        let chart = function () {
+            const svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+
+            svg.append("g")
+                .call(xAxis);
+
+            svg.append("g")
+                .call(yAxis);
+
+            const pts = [[5, 0], [0, 5], [-5, 0], [0, -5]]
+
+            const g_pnts = svg.append("g")
+                .selectAll("circle")
+                .data(pts)
+                .enter().append("circle")
+                .attr("cx", d => xsc(d[0]))
+                .attr("cy", d => ysc(d[1]))
+                .attr("r", 4)
+                .attr("fill", "#f00");
+
+            return svg.node();
+
+        }
+        chart()
+    </script>
+</body>
+
+</html>

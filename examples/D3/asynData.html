@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>从外部文件中加载数据</title>
+
+    <script type="text/javascript" src="d3.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center my-5">从外部文件中加载数据</h1>
+    </header>
+    <main>
+        <section class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8" id="stage"></div>
+            </div>
+        </section>
+        <section class="container my-5">
+            <div class="row justify-content-center">
+                <div class="control-group col-md-8">
+                    <button class="btn btn-primary" onclick="sort(compareByScore)">
+                        按成绩排序
+                    </button>
+                    <button class="btn btn-primary" onclick="select('1')">
+                        新闻1班
+                    </button>
+                    <button class="btn btn-primary" onclick="select('2')">
+                        新闻2班
+                    </button>
+                    <button class="btn btn-primary" onclick="select('3')">
+                        广告1班
+                    </button>
+                    <button class="btn btn-primary" onclick="select('4')">
+                        广告2班
+                    </button>
+                    <button class="btn btn-primary" onclick="select()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="container-fluid mt-5">
+        <p>《网络编辑与制作》课程练习</p>
+    </footer>
+    <!-- <script src="asynData.js"></script> -->
+    <script src="main.js"></script>
+    <script>
+        window.onload = getData();
+    </script>
+</body>
+
+</html>

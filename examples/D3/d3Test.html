@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="d3.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script>
+        // const data = await d3.csv("CSSQuizScore.csv");
+        // console.log(data);
+        d3.select(document.body).append('p')
+        d3.select(document.body).append('p')
+        d3.select(document.body).append('p')
+
+        var dataset = [3, 6, 9, 12, 15];
+        var p = d3.select("body")
+            .selectAll("p");
+        var update = p.data(dataset) //绑定数据,并得到update部分
+        var enter = update.enter(); //得到enter部分
+        //下面检验是否真的得到对于update的处理
+        update.text(function (d, i) {
+            return "update: " + d + ",index: " + i;
+        })
+        //对于enter的处理
+        //注意，这里需要先添加足够多的<p>，然后在添加文本
+        var pEnter = enter.append("p") //添加足够多的<p>
+        pEnter.text(function (d, i) {
+            return "enter: " + d + ",index: " + i;
+        })
+
+        // var dataset = [3];
+
+        // //选择body中的p元素
+        // var p = d3.select("body").selectAll("p");
+
+        // //获取update部分
+        // var update = p.data(dataset);
+
+        // //获取exit部分
+        // var exit = update.exit();
+
+        // //update部分的处理：更新属性值
+        // update.text(function (d) {
+        //     return "update " + d;
+        // });
+
+        // //exit部分的处理：修改p元素的属性
+        // exit.text(function (d) {
+        //     return "exit";
+        // });
+
+//exit部分的处理通常是删除元素
+// exit.remove();
+    </script>
+
+</body>
+
+</html>
