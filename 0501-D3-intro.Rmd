@@ -341,3 +341,11 @@ d3.selectAll("div") // <-- A
 ```
 
 第C行定义了一个参数为d、i的迭代函数。第D行则更加有趣，在开头部分，d3.select函数将this封装为一个d3选集，这个选集是一个用变量this表示的且包含当前DOM元素的单元素选集。
+
+<iframe
+     src="https://codesandbox.io/embed/runtime-sea-xol2o?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="d3-bar"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>

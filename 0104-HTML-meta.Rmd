@@ -105,7 +105,7 @@
 </html>
 ```
 
-##style
+## style
 
 `style`元素是`head`元素的子元素，用来设定 HTML 文档的内部样式表。
 

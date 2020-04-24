@@ -24,6 +24,14 @@ CSS3 的一个革新之处，是可以实现过渡及动画，前端开发人员
 
 上述例子中，当鼠标移动到矩形之上时，矩形的背景色会在 1 秒之内发生变化。[案例](examples\CSS\transition.html)
 
+<iframe
+     src="https://codesandbox.io/embed/transition-element-tjguh?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="transition-element"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
 ### 过渡属性
 
 `transition-property` 属性决定元素的哪些属性会发生过渡变化。默认情况下，不同状态之间的所有不同值得属性都会有过渡变化效果。但我们可以通过 `transition-property` 属性来具体指定需要有过渡效果的属性。比如，上述的例子中，我们指定了背景 `background` 作为唯一的过渡效果属性。
@@ -84,6 +92,13 @@ CSS3 的一个革新之处，是可以实现过渡及动画，前端开发人员
 1. z-index
 
 [案例](examples\CSS\borderTransition.html)
+<iframe
+     src="https://codesandbox.io/embed/stupefied-easley-ndghe?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="border-width-transition"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
 
 ## 过渡效果持续时间
 
@@ -193,6 +208,14 @@ CSS 部分：
 
 其中用到了绝对定位，使得图片和文字处于相同容器的相同位置，而图片背部的描述文字，通过绕 Y 轴旋转 180 度后，再旋转过来之后，就实现文字的正常显示。[案例](examples/CSS/cardflip.html)
 
+<iframe
+     src="https://codesandbox.io/embed/jovial-glitter-6rlcp?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="card-flip"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
 ## 动画
 
 过渡最适合构建那些状态有变化的动画，而要做更加复杂的动画，最好的选择是使用 animation 属性。
@@ -218,7 +241,7 @@ CSS 部分：
 }
 ```
 
-上例中，动画名称为 `slide`，有三个关键帧断点，使用定位关键词产生位置上的变化。还可以使用关键词 `from to` 表示` 0%` 和 `100%`。
+上例中，动画名称为 `slide`，有三个关键帧断点，使用定位关键词产生位置上的变化。还可以使用关键词 `from to` 表示`0%` 和 `100%`。
 
 ### 动画名称
 
@@ -246,6 +269,14 @@ CSS 部分：
 ### 动画重复次数
 
 默认情况下，动画只执行一次，我们可以通过 `animation-iteration-count` 属性指定重复次数，其值可以是整数，还可以是 `infinite` 关键字，使用 `infinite` 关键字后，动画效果将无限循环。[案例](examples\CSS\animation.html)
+
+<iframe
+     src="https://codesandbox.io/embed/suspicious-shirley-brd4j?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="animate-ball"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
 
 ### 动画方向
 
@@ -290,3 +321,11 @@ CSS 部分：
 ```
 
 其中 `fadeInRight`、`bounceInLeft` 为 `animate.css` 提供的动画效果。[案例](examples\CSS\animate.css.html)
+
+<iframe
+     src="https://codesandbox.io/embed/jolly-dawn-ncf5o?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="animate-css"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>

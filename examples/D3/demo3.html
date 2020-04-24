@@ -41,12 +41,10 @@
         <div id='bar'></div>
     </div>
 </body>
-
-</html>
-<script src="d3.js"></script>
+<script src="https://cdn.bootcss.com/d3/5.15.1/d3.min.js"></script>
 <script>
     /** V4柱状图初始化 **/
-    function BarInit(width, height, rectPadding, padding, data) {
+    function BarInit(width, height, padding, data) {
 
         // 获取x轴的数据
         var Xdatas = data.map(function (d) {
@@ -148,7 +146,7 @@
     };
     const width = 760 - padding.left - padding.right;
     const height = 380 - padding.top - padding.bottom;
-    const rectPadding = 4; //矩形之间的空白
+
     var data = [{
         name: '赵',
         value: 40
@@ -191,5 +189,7 @@
     }
     ]; //数据
 
-    BarInit(width, height, rectPadding, padding, data);
+    BarInit(width, height, padding, data);
 </script>
+
+</html>
