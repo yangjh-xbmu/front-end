@@ -1,0 +1,55 @@
+# 坐标轴
+
+坐标轴的绘制，需要使用到svg
+
+先创建一个svg元素，用于展示坐标。
+
+```javascript
+var marge = {
+    top: 60,
+    bottom: 60,
+    left: 60,
+    right: 60
+}
+var dataset = [2.5, 2.1, 1.7, 1.3, 0.9];
+
+var scaleLinear = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, 250]);
+
+var svg = d3.select("svg");
+var g = svg.append("g")
+    .attr("transform", "translate(" + marge.top + "," + marge.left + ")")
+    .style("background-color", "#eee")
+
+```
+
+## d3.axisBottom(scale) 
+
+Constructs a new bottom-oriented axis generator for the given scale, with empty tick arguments, a tick size of 6 and padding of 3. In this orientation, ticks are drawn below the horizontal domain path.
+
+```javascript
+var rectHeight = 30;
+
+//为坐标轴定义一个线性比例尺
+var xScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, 250]);
+//定义一个坐标轴
+var xAxis = d3.axisBottom(xScale) //定义一个axis，由bottom可知，是朝下的
+    .ticks(7); //设置刻度数目
+g.append("g")
+    .attr("transform", "translate(" + 20 + "," + (dataset.length * rectHeight) + ")")
+    .call(xAxis)
+
+```
+
+将Axis对象作为参数传入`d3.selection.call`函数。`d3.selection.call`会在当前选集上调用该参数。
+
+<iframe
+     src="https://codesandbox.io/embed/tender-cloud-djb8q?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="tender-cloud-djb8q"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>

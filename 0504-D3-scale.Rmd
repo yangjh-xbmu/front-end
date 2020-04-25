@@ -1,0 +1,153 @@
+# 比例尺Scale
+
+从某种程度上讲，数据可视化就是将数据高效准确地映射为图形。D3提供多种称为`scale`的结构来支持从数据模型到可视化模型的映射。尺度到底是什么呢？简单来说，尺度可以视为数学函数。
+
+>如果f是一个从集合A到集合B的函数，我们说集合A是f的定义域，集合B是f的值域。如果f(a)=b，则我们称b为a的像，a是b的原像。函数f的值域或者像，是集合A中所有元素的像的集合。如果f是一个A到B的函数，那么我们称f为A到B的一个映射。
+
+在数学中，x 的范围被称为定义域，y 的范围被称为值域。
+
+D3 中的比例尺，也有定义域和值域，分别被称为 domain 和 range。开发者需要指定 domain 和 range 的范围，如此即可得到一个计算关系。
+
+## 连续比例尺
+
+最常用的尺度——连续尺度。连续尺度能够把一个连续的定义域映射到一个连续的值域，它包括线性尺度、幂级尺度、对数尺度和时间尺度。
+
+```javascript
+
+d3.select("body").append('div').attr("id", "linear")
+d3.select("body").append('div').attr("id", "linearCapped")
+
+var max = 11,
+    data = [];
+for (var i = 1; i < max; ++i) data.push(i);
+
+var linear = d3.scaleLinear() // <-A
+    .domain([1, 10]) // <-B
+    .range([1, 10]); // <-C
+var linearCapped = d3.scaleLinear()
+    .domain([1, 10])
+    .range([1, 24]); // <-D
+
+var pow = d3.scalePow().exponent(2); // <-E
+var powCapped = d3.scalePow() // <-F
+    .exponent(2)
+    .domain([1, 10])
+    .rangeRound([1, 10]); // <-G
+
+var log = d3.scaleLog(); // <-H
+var logCapped = d3.scaleLog() // <-I
+    .domain([1, 10])
+    .rangeRound([1, 10]);
+
+
+function render(data, scale, selector) {
+    d3.select(selector).selectAll("div.cell")
+        .data(data)
+        .enter().append("div").classed("cell", true);
+
+    d3.select(selector).selectAll("div.cell")
+        .data(data)
+        .exit().remove();
+
+    d3.select(selector).selectAll("div.cell")
+        .data(data)
+        .style("display", "inline-block")
+        .text(function(d) {
+            return scale(d).toFixed(1);
+        });
+}
+
+render(data, linear, "#linear");
+render(data, linearCapped, "linearCapped");
+
+```
+
+d3.scaleLinear() 的返回值，是可以当做函数来使用的。参见：<https://github.com/d3/d3-scale/blob/v2.2.2/README.md#scaleLinear>，因此，才有这样的用法：
+
+```javascript
+linearCapped(2)
+```
+
+    3.5555555555555554
+
+## 序数比例尺
+
+有时候，定义域和值域不一定是连续的。例如，姓名、地名等等，这些值都是离散的，线性比例尺不适合，需要用到序数比例尺。
+
+```javascript
+var index = [0, 1, 2, 3, 4];
+var color = ["red", "blue", "green", "yellow", "black"];
+
+var ordinal = d3.scaleOrdinal()
+        .domain(index)
+        .range(color);
+```
+
+```javascript
+ordinal(3);
+```
+
+    'yellow'
+
+```javascript
+var svg = d3.select(document.body).append('svg')
+    .attr('xmlns', 'http://www.w3.org/2000/svg')
+    .attr('width', 500)
+    .attr('height', 500);
+
+var marge = {
+top: 60,
+bottom: 60,
+left: 60,
+right: 60
+   }
+   var dataset = [2.5, 2.1, 1.7, 1.3, 0.9];
+
+   //定义一个线性比例尺
+   var scaleLinear = d3.scaleLinear()
+.domain([0, d3.max(dataset)])
+.range([0, 300]);
+
+   var svg = d3.select("svg");
+   var g = svg.append("g")
+.attr("transform", "translate(" + marge.top + "," + marge.left + ")");
+
+   var rectHeight = 30;
+
+   g.selectAll("rect")
+.data(dataset)
+.enter()
+.append("rect")
+.attr("x", 20)
+.attr("y", function(d, i) {
+    return i * rectHeight;
+})
+.attr("width", function(d) {
+    return scaleLinear(d); //设置宽,并在这里使用比例尺
+})
+.attr("height", rectHeight - 5)
+
+```
+
+```javascript
+var max = 21,
+    data = [];
+
+var colorScale = d3.scaleLinear() // <-A
+    .domain([0, max])
+    .range(["white", "#4169e1"]);
+
+var divergingScale = function(pivot) { // <-B
+    return d3.scaleLinear()
+        .domain([0, pivot, max]) // <-C
+        .range(["white", "#4169e1", "white"])
+};
+```
+
+<iframe
+     src="https://codesandbox.io/embed/old-shadow-qvdbn?fontsize=14&hidenavigation=1&theme=light"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="old-shadow-qvdbn"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>

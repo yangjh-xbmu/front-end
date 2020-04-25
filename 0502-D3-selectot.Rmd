@@ -1,0 +1,157 @@
+# D3中的选集
+
+选集（selection）是基于D3的可视化项目的重要基础之一，用来定位页面上的特定视觉元素。
+
+在可视化项目中，我们需要不断地对页面上不同元素进行选择、设定属性和方法等等操作，这将很快演变成为单调的重复性工作。为了减少开发中的琐碎工作，D3引入了自己的选择器API。
+
+## 选取单个元素
+
+在D3中，使用`d3.select()`方法来选取单个元素，该方法使用CSS选择器或操作对象为参数，并返回D3选集。这个选择器虽然可以选择多个元素，但是只返回选集中的第一个匹配的元素。
+
+```javascript
+var svg = d3.select(document.body).append('p').text('hi')
+```
+
+所有的D3选集都支持一系列转化方式（the selection’s transformation methods），本例中用到的`text()`方法就是其中之一。下面列出部分常见转换方法。这些方法大都可以获取或设置元素的特性。
+
+* attr()
+* classed()
+* style()
+* text()
+* html()
+
+```javascript
+// 设定属性及其值
+d3.select("p").attr("foo", "goo");
+```
+
+```javascript
+// 获取指定属性的值
+d3.select("p").attr("foo");
+```
+
+```javascript
+// 检查元素是否具有指定的类
+d3.select("p").classed("goo");
+```
+
+```javascript
+// 为选定的元素增加类
+d3.select("p").classed("goo", true);
+$$.html(document.body.innerHTML);
+```
+
+```javascript
+// 还可以通过函数的方式，灵活增加类
+d3.select("p").classed("goo", function() {
+    return true;
+});
+$$.html(document.body.innerHTML);
+```
+
+```javascript
+// 获取元素的某个样式的值
+d3.select("p").style("font-size", "10px");
+color = d3.select("p").style("font-size");
+console.log(color, d3.select("p").style("color"))
+$$.html(document.body.innerHTML);
+```
+
+```javascript
+// 获取元素的文本内容
+d3.select("p").text();
+```
+
+```javascript
+// 设定元素的文本内容
+d3.select("p").text("Hello");
+$$.html(document.body.innerHTML);
+```
+
+```javascript
+// 以函数的方式，设定内容
+d3.select("p").text(function() {
+    return Date();
+});
+
+```
+
+```javascript
+// 获取元素内容
+d3.select("p").html()
+```
+
+```javascript
+// 通过函数方式设定元素内容
+d3.select("p").html(function() {
+    return d3.select(this).text() +
+        " <span style='color: blue;'>D3.js</span>";
+});
+
+```
+
+## 选取多个元素
+
+通常情况下，我们很少只选取单个元素。相反，大多数情况下是同时对页面上的多个元素进行特定处理。在下面的例子中，我们将介绍D3的多元素选择器及其API。
+
+```javascript
+// 增加若干个div元素
+for (i = 0; i < 3; i++) {
+    d3.select(document.body).append('div')
+}
+// 选中所有的div元素，并进行修改
+d3.selectAll("div")
+    .style("background-color", "#ccc")
+    .style("width", "100px")
+    .style("height", "100px")
+    .style("margin", "10px");
+
+```
+
+转化方法，是基于选择集的，所以既适用于单个元素，也适用于多个元素组成的集合。
+
+还可对选集调用`each()`方法，分别处理每一个元素。`each()`方法依次传递当前数据（d）、当前索引（i）和当前组（节点），并将其作为当前DOM元素。此方法可用于为每个选定元素调用任意代码，对于创建同时访问父数据和子数据的上下文非常有用。
+
+```javascript
+// 选中所有的div元素，统一设定样式，分别设定内容
+d3.selectAll("div")
+    .style("background-color", "#ccc")
+    .style("width", "100px")
+    .style("height", "100px")
+    .style("margin", "10px")
+    .each(function(d, i) {
+        d3.select(this)
+            .append("p")
+            .text(i)
+            .style("text-align", "center")
+            .style("color", "white");
+    });
+$$.html(document.body.innerHTML);
+```
+
+`d3.select(this)`这个选集是一个用变量this表示的且包含当前DOM元素的单元素选集。
+
+## 使用子选择器
+
+可以在select方法中还可使用select，从而达到更加灵活的处理。
+
+```javascript
+d3.select("body")
+    .style("margin", "10px auto")
+    .selectAll("div")
+    .style("background-color", "#bbb")
+$$.html(document.body.innerHTML);
+```
+
+## 获得原始元素
+
+在某些时候，我们可能需要获得原始的DOM元素，这个时候，可以使用node()方法，该方法会将选择的元素节点，以数组形式返回。在某些情况下，特别是D3与其他JavaScript库搭配使用时，原始选集访问方式特别方便，因为其他库无法使用D3选集而只能使用原始的DOM元素。
+
+```javascript
+d3.selectAll("div").nodes()
+```
+
+## 参考资料
+
+1. <https://github.com/d3/d3/blob/master/API.md#selections-d3-selection>
+1. <https://github.com/d3/d3-selection/blob/master/README.md>
