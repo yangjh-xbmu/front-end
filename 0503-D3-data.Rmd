@@ -224,8 +224,6 @@ function render(data) {
 
 D3.js 也可以外部数据文件为数据来源，我们可以使用异步编程方式，打开外部数据。
 
-[案例](examples\D3\asynData.html)
-
 ## 参考资料
 
 1. <https://github.com/d3/d3-selection/blob/v1.4.1/README.md#joining-data>
